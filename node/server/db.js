@@ -1,3 +1,26 @@
+var FCM = require('fcm-node');
+
+var serverKey = 'AAAAGdpIsWs:APA91bFtuYzDLTIHn7PFNCMsi8t3onoTG0p1nr03r2f9EvqybDnipMLhKMxPPLX9SM78_f1JhAe_KAyTkbwpMl8uOXBiQIRBpqhdz_2frBC6oamOLysc8wzQB2Bhjmv0giDf8Hj-lheZ';
+var fcm = new FCM(serverKey);
+
+var message = { //this may vary according to the message type (single recipient, multicast, topic, et cetera)
+    collapse_key: 'your_collapse_key',
+
+    notification: {
+        title: 'You are',
+        body: 'A fragrant'
+    },
+
+    data: {  //you can send only notification or only data(or include both)
+        my_key: 'my value',
+        my_another_key: 'my another value'
+    }
+};
+
+
+
+
+
 /**
  * Created by harryliu on 1/14/17.
  */
@@ -30,6 +53,7 @@ module.exports = {
   addUser: addUser,
   addDoor: addDoor,
   addDevice: addDevice,
+  ring: ring,
 };
 
 
@@ -41,6 +65,47 @@ function doorcode(){
         text += possible.charAt(Math.floor(Math.random() * possible.length));
 
     return text;
+}
+
+
+
+function ring(req, res, next){
+	console.log(req.body);
+	db.any(' select devices.regkey from doorbells inner join devices on devices.user_uuid = doorbells.user_uuid where doorbells.doorcode = $1', req.body.doorcode). then(function(data){
+		console.log(data);
+		if(data.length < 1){
+			res.status(404).json({
+				status: 'failure',
+				message: 'Unable to ring'
+			});
+		} else {
+			data.forEach( function (d){
+				message.to = d.regkey;
+				fcm.send(message, function (err, response) {
+					if (err) {
+//						res.status(404).json({
+//							status: 'failure',
+//							message: 'Unable to ring'
+//						});
+					} else {
+//						res.status(200).json({
+//							status: 'success',
+//							message: 'ring'
+//						});
+					}
+				});
+
+			});
+						res.status(200).json({
+							status: 'success',
+							message: 'ring'
+						});
+
+			
+		}
+	}).catch(function(err){
+		return next(err);
+	});
 }
 
 
