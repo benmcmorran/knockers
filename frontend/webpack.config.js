@@ -12,7 +12,14 @@ var config = {
   },
   module: {
     loaders: [
-      { test: /\.jsx$/, loader: 'jsx-loader' }
+      {
+        test: /\.jsx$/,
+        loader: 'jsx-loader'
+      },
+      {
+        test: /\.scss$/,
+        loaders: ["style-loader", "css-loader", "sass-loader"]
+      }
     ]
   },
 };
