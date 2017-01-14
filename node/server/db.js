@@ -29,6 +29,7 @@ var db = pgp(connectionString);
 module.exports = {
   addUser: addUser,
   addDoor: addDoor,
+  addDevice: addDevice,
 };
 
 
@@ -44,48 +45,59 @@ function doorcode(){
 
 
 
-function addDoor(req, res, next){
+function addDevice(req, res, next){
 	console.log(req.body);
-
-
-
-
 	db.any('select * from users WHERE uuid = $1', [req.body.user_uuid])
 	.then(function (data) {
 		console.log(data);
 		if(data.length < 1){
-
 			res.status(404).json ({
 				status: 'failure',
 				message: 'User does not exist'
 			});
-
-
-
 		} else {
-
-	req.body.genuuid = uuid();
-	req.body.doorcode = doorcode();
-	db.none('insert into doorbells(uuid, user_uuid, description, doorcode)' + ' values ( ${genuuid}, ${user_uuid}, ${description}, ${doorcode})', req.body).then(function(){
-		res.status(200).json({
-			status: 'success',
-			message: 'Added Doorbell'
-		});
-	}).catch(function(err) {
+			req.body.genuuid = uuid();
+			db.none('insert into devices(uuid, user_uuid, name, regkey)' + ' values ( ${genuuid}, ${user_uuid}, ${name}, ${regkey})', req.body).then(function(){
+				res.status(200).json({
+					status: 'success',
+					message: 'Added Device'
+				});
+			}).catch(function(err) {
+				return next(err);
+			});
+		}
+	}).catch(function (err) {
 		return next(err);
 	});
+}
 
 
 
-
-
+function addDoor(req, res, next){
+	console.log(req.body);
+	db.any('select * from users WHERE uuid = $1', [req.body.user_uuid])
+	.then(function (data) {
+		console.log(data);
+		if(data.length < 1){
+			res.status(404).json ({
+				status: 'failure',
+				message: 'User does not exist'
+			});
+		} else {
+			req.body.genuuid = uuid();
+			req.body.doorcode = doorcode();
+			db.none('insert into doorbells(uuid, user_uuid, description, doorcode)' + ' values ( ${genuuid}, ${user_uuid}, ${description}, ${doorcode})', req.body).then(function(){
+				res.status(200).json({
+					status: 'success',
+					message: 'Added Doorbell'
+				});
+			}).catch(function(err) {
+				return next(err);
+			});
 		}
-})
-.catch(function (err) {
-	return next(err);
-});
-
-
+	}).catch(function (err) {
+		return next(err);
+	});
 }
 
 
