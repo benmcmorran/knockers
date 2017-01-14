@@ -24,7 +24,6 @@
     "babel-preset-react-hmre": "^1.1.1",
     "css-loader": "^0.26.1",
     "html-webpack-plugin": "^2.26.0",
-    "jsx-loader": "^0.13.2",
     "node-sass": "^4.3.0",
     "sass-loader": "^4.1.1",
     "style-loader": "^0.13.1",
@@ -34,9 +33,9 @@
   },
   "scripts": {
     "webpack": "webpack --progress --colors",
-    "build": "rm -rf client/public && mkdir client/public && webpack --progress",
-    "webpack-watch": "webpack --progress --colors --watch",
-    "webpack-serve": "webpack-dev-server --progess --colors --inline --hot",
+    "build": "rm -rf client/public && mkdir client/public && webpack --progress --colors",
+    "watch": "webpack --progress --colors --watch",
+    "serve": "webpack-dev-server --progess --colors --inline --hot",
     "start": "DB_USER=alex DB_HOST=130.215.127.139 DB_PORT=5432 DB_NAME=knockers npm run server",
     "server": "node server/server.js"
   },

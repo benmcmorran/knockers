@@ -1,0 +1,36 @@
+@import '../main.scss';
+
+.textfield {
+  width: 100%;
+  outline: none;
+  padding-bottom: .5em;
+  padding-top: .5em;
+}
+
+.textfield-label,
+.textfield-input {
+  width: 100%;
+  outline: none;
+  border: 0;
+}
+
+.textfield-label {
+  font-size: .9em;
+  color: $gray-color
+}
+
+.textfield-input {
+  font-size: 1.2em;
+  padding-bottom: .3em;
+  padding-top: .3em;
+  border-bottom: .2em solid $light-gray-color;
+  transition: border-bottom $transition-med;
+}
+
+.textfield-input:hover {
+  border-bottom: .2em solid $accent-color;
+}
+
+.textfield-input:focus {
+  border-bottom: .2em solid $main-color;
+}

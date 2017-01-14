@@ -1,8 +1,17 @@
 $font-stack:    Helvetica, sans-serif;
 $primary-color: #333;
 $background-color: #f2f2f2;
+
+$gray-color: #999;
+$dark-gray-color: #444;
+$light-gray-color: #cdcdcd;
+
 $main-color: #2096f3;
-$main-color-light: #50c6ff;
-$accent-color-light: #eef3fb;
+$dark-main-color: #2096f3;
+$light-main-color: #50c6ff;
+$accent-color: #b0ffff;
+$dark-accent-color: #80e6ff;
+$light-accent-color: #eef3fb;
 
 $transition-fast: .2s;
+$transition-med: .5s;

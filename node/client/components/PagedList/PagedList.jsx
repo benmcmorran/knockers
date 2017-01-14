@@ -32,6 +32,7 @@ var PagedList = React.createClass({
       startIndex,
       endIndex
     } = this.state;
+
     var indexText = startIndex + 1 + " - " + endIndex;
     if (endIndex < items.length) {
         indexText += " of " + items.length;
