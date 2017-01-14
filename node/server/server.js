@@ -3,23 +3,26 @@ var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
 
 
-var gcm = require('node-gcm');
  
- 
-// Set up the sender with you API key, prepare your recipients' registration tokens. 
-var sender = new gcm.Sender('AAAAGdpIsWs:APA91bFtuYzDLTIHn7PFNCMsi8t3onoTG0p1nr03r2f9EvqybDnipMLhKMxPPLX9SM78_f1JhAe_KAyTkbwpMl8uOXBiQIRBpqhdz_2frBC6oamOLysc8wzQB2Bhjmv0giDf8Hj-lheZ');
+var FCM = require('fcm-node');
 
+var serverKey = 'AAAAGdpIsWs:APA91bFtuYzDLTIHn7PFNCMsi8t3onoTG0p1nr03r2f9EvqybDnipMLhKMxPPLX9SM78_f1JhAe_KAyTkbwpMl8uOXBiQIRBpqhdz_2frBC6oamOLysc8wzQB2Bhjmv0giDf8Hj-lheZ';
+var fcm = new FCM(serverKey);
 
-
-var regTokens = ['APA91bG73BGgBOpCSQMtV8O4tyxoWyJaQ1FCfukYWUWi6xteMP5nbTs7AxZQ90fApnHy9LqWRFpmH7ytaH3yVPrJ9WubOYk0IFIlBtZ-3BhHghat80dMan4EhhHwwTiTn-23hRxdBukY'];
-
-
-
-
-var message = new gcm.Message({
-    data: { key1: 'msg1' ,
-	    title: 'kekekekekekke' }
-});
+var message = { //this may vary according to the message type (single recipient, multicast, topic, et cetera)
+    to: 'eSMgg3-3lfs:APA91bG73BGgBOpCSQMtV8O4tyxoWyJaQ1FCfukYWUWi6xteMP5nbTs7AxZQ90fApnHy9LqWRFpmH7ytaH3yVPrJ9WubOYk0IFIlBtZ-3BhHghat80dMan4EhhHwwTiTn-23hRxdBukY', 
+    collapse_key: 'your_collapse_key',
+    
+    notification: {
+        title: 'You are', 
+        body: 'A fragrant' 
+    },
+    
+    data: {  //you can send only notification or only data(or include both)
+        my_key: 'my value',
+        my_another_key: 'my another value'
+    }
+};
 
 
 // configure app to use bodyParser()
@@ -45,13 +48,13 @@ router.post('/create/:desc', function(req, res){
 
 router.get('/ring/:id', function(req, res){
 	res.json({message: 'DINGDONG' } );
-
-sender.send(message, { to: regTokens }, function (err, response) {
-    if(err) console.error(err);
-    else 	console.log(response);
+fcm.send(message, function(err, response){
+    if (err) {
+        console.log("Something has gone wrong!\n", err);
+    } else {
+        console.log("Successfully sent with response: ", response);
+    }
 });
-
-
 
 
 
