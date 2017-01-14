@@ -2,6 +2,7 @@
 
 .pagedlist {
   width: 100%;
+  text-align: justify;
   background-color: #ffffff;
   box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.16), 0 1px 2.5px 0 rgba(0, 0, 0, 0.26);
 }
@@ -42,8 +43,28 @@
 .pagedlist-next,
 .pagedlist-index {
   display: inline-block;
-  padding-left: 1em;
-  padding-right: 1em;
+  margin-left: .5em;
+  margin-right: .5em;
+}
+
+.pagedlist-prev,
+.pagedlist-next {
+  height: 2em;
+  width: 2em;
+  line-height: 2em;
+  text-align: center;
+  box-sizing: border-box;
+  transition: background $transition-fast;
+}
+
+.pagedlist-prev:hover,
+.pagedlist-next:hover {
+  background: $light-gray-color;
+}
+
+.pagedlist-prev:active,
+.pagedlist-next:active {
+  background: $gray-color;
 }
 
 // PagedlistItem

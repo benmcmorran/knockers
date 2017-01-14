@@ -19,7 +19,7 @@ var Root = React.createClass({
     } = this.state;
 
     var items = [];
-    for (var i = 0; i < 0; i++) {
+    for (var i = 0; i < 20; i++) {
       items.push(["Do0r " + (i + 1), (((i * 32 + 55) * 72) % 58 + 1) + "minutes ago"]);
     }
 
@@ -39,11 +39,19 @@ var Root = React.createClass({
               ]
             }
             items={ items } /> ) :
-            ( <SignIn /> )
+            ( <SignIn 
+                signIn={ this.signIn } /> )
         }
+        </div>
+        <div className="pagefooter">
+          Hack@WPI 2017, MIT License
         </div>
       </div>
     )
+  },
+  signIn: function() {
+    console.log("test");
+    this.setState({ loggedIn: true });
   }
 });
 

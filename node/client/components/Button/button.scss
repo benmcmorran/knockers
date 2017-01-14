@@ -1,0 +1,36 @@
+@import '../main.scss';
+
+.button {
+  width: 100%;
+  height: 2em;
+  line-height: 2em;
+  font-size: 1.4em;
+  color: $main-color;
+  vertical-align: middle;
+  text-align: center;
+  transition: color $transition-fast, background $transition-fast;
+  outline: none;
+  border: none;
+  background: none;
+}
+
+.button:hover {
+  color: $light-main-color;
+}
+
+.button:active {
+  color: $dark-main-color;
+}
+
+.button.fill {
+  background: $main-color;
+  color: $white-color;
+}
+
+.button.fill:hover {
+  background: $light-main-color;
+}
+
+.button.fill:active {
+  background: $dark-main-color;
+}

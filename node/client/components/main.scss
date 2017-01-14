@@ -5,15 +5,27 @@ body {
   font: 100% $font-stack;
   color: $primary-color;
   margin: 0;
+  
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  user-select: none;          /* Likely future */
 }
 
 .root {
-  width: 100%;
+  overflow: hidden;
   text-align: center;
 }
 
 .root .content {
   width: 56.25%;
   display: inline-block;
-  text-align: justify;
+  text-align: center;
+}
+
+.pagefooter {
+  text-align: left;
+  padding: 4em;
+  font-size: .8em;
+  color: $gray-color;
 }
