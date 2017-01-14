@@ -1,4 +1,5 @@
-// components/Root.jsx
+"use strict";
+
 var React = require('react');
 var Navbar = require('./Navbar/Navbar.jsx');
 var Title = require('./Title/Title.jsx');
@@ -7,6 +8,11 @@ require('./main.scss');
 
 var Root = React.createClass({
   render: function () {
+    var items = [];
+    for (var i = 0; i < 55; i++) {
+      items.push(["Do0r " + (i + 1), (((i * 32 + 55) * 72) % 58 + 1) + "minutes ago"]);
+    }
+
     return (
       <div className="root">
         <Navbar />
@@ -19,13 +25,7 @@ var Root = React.createClass({
               { name: "Last Run", style: {textAlign: "right", right: 0 } }
             ]
           }
-          items={
-            [
-              ["Front Door", "1 minute ago"],
-              ["Back Door", "40 minutes ago"],
-              ["Garage Door", "8 days ago"],
-            ]
-          } />
+          items={ items } />
         </div>
       </div>
     )

@@ -1,4 +1,5 @@
-// components/Root.jsx
+"use strict";
+
 var React = require('react');
 
 require('./title.scss');
