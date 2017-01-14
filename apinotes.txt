@@ -14,6 +14,6 @@ get /list/
 	//pass in userid
 	//SORTED by LAST RUNG list of doorbells
 
-get /details/blah -- doorbell
+get /list/blah -- doorbell
 	//pass in userid to make sure
 	returns
