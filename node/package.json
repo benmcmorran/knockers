@@ -26,8 +26,8 @@
   },
   "scripts": {
     "webpack": "webpack --progress --colors",
-    "webpack-watch": "webpack --progress --colors --watch",
-    "webpack-serve": "webpack-dev-server --progess --colors",
+    "watch": "webpack --progress --colors --watch",
+    "serve": "webpack-dev-server --progess --colors",
     "start": "DB_USER=alex DB_HOST=130.215.127.139 DB_PORT=5432 DB_NAME=knockers npm run server",
     "server": "node server/server.js"
   },
