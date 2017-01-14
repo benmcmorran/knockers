@@ -17,3 +17,10 @@ get /list/
 get /list/blah -- doorbell
 	//pass in userid to make sure
 	returns
+
+
+
+post /firenew/   id - add new firebase id
+
+post /fireupdate/
+		id, id -- update firebase it, new id, old it.
