@@ -22,7 +22,8 @@
   },
   "scripts": {
     "webpack": "webpack --progress --colors",
-    "start": "npm run webpack"
+    "start": "npm run webpack",
+    "server": "node server/server.js"
   },
   "repository": {
     "type": "git",
