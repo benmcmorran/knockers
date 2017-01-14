@@ -3,7 +3,13 @@
   "version": "0.0.1",
   "description": "A virtual doorbell device",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "node-gcm-service": "^0.2.8",
+    "pg": "^6.1.2",
+    "push-notification": "^0.1.8"
+  },
   "devDependencies": {
     "css-loader": "^0.26.1",
     "html-webpack-plugin": "^2.26.0",
