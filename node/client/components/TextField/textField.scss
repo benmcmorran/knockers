@@ -4,22 +4,36 @@
   width: 100%;
   outline: none;
   padding-bottom: .5em;
-  padding-top: .5em;
+  padding-top: 1.5em;
 }
 
-.textfield-label,
+.textfield-label {
+  position: absolute;
+  transform: translateY(.8em);
+  transition: transform $transition-fast;
+  // Allow clicks to pass through
+  height:0px;
+  overflow:visible;
+  pointer-events:none;
+
+  font-size: .9em;
+  color: $gray-color;
+
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  user-select: none;          /* Likely future */
+}
+
+.textfield.active .textfield-label {
+  transform: translateY(-1em);
+}
+
 .textfield-input {
   width: 100%;
   outline: none;
   border: 0;
-}
 
-.textfield-label {
-  font-size: .9em;
-  color: $gray-color
-}
-
-.textfield-input {
   font-size: 1.2em;
   padding-bottom: .3em;
   padding-top: .3em;

@@ -5,24 +5,56 @@ var React = require('react');
 require('./textField.scss');
 
 var TextField = React.createClass({
+  getInitialState: function () {
+    return { active: false };
+  },
+  refs: {
+    key: React.ReactInstance,
+    input: HTMLElement
+  },
   render: function () {
     let {
       label,
       type,
       maxLength
     } = this.props;
+    let {
+      active
+    } = this.state;
 
     return (
-      <div className="textfield">
+      <div className={ 
+        "textfield" +
+        (active ? " active" : '')
+        } >
         { label && (
-          <span className="textfield-label"> { label } </span>
+          <span 
+            className="textfield-label"
+            > { label } </span>
         )}
         <input 
           className="textfield-input"
           type={ type }
-          maxLength={ maxLength ? maxLength : 32 } />
+          maxLength={ maxLength ? maxLength : 32 } 
+          ref="input"
+          onChange={ this._handleChange }
+          onFocus={ this._onFocus }
+          onBlur={ this._onBlur } />
       </div>
     )
+  },
+  _handleChange: function(event) {
+    if (this.refs.input.value.length > 0) {
+      this.setState({ active: true });
+    }
+  },
+  _onFocus: function(event) {
+    this.setState({ active: true });
+  },
+  _onBlur: function(event) {
+    if (this.refs.input.value.length == 0) {
+      this.setState({ active: false });
+    }
   }
 });
 
