@@ -1,0 +1,19 @@
+@import 'theme.scss';
+
+body {
+  background-color: $background-color;
+  font: 100% $font-stack;
+  color: $primary-color;
+  margin: 0;
+}
+
+.root {
+  width: 100%;
+  text-align: center;
+}
+
+.root .content {
+  width: 56.25%;
+  display: inline-block;
+  text-align: justify;
+}
