@@ -46,6 +46,24 @@ function doorcode(){
 
 function addDoor(req, res, next){
 	console.log(req.body);
+
+
+
+
+	db.any('select * from users WHERE uuid = $1', [req.body.user_uuid])
+	.then(function (data) {
+		console.log(data);
+		if(data.length < 1){
+
+			res.status(404).json ({
+				status: 'failure',
+				message: 'User does not exist'
+			});
+
+
+
+		} else {
+
 	req.body.genuuid = uuid();
 	req.body.doorcode = doorcode();
 	db.none('insert into doorbells(uuid, user_uuid, description, doorcode)' + ' values ( ${genuuid}, ${user_uuid}, ${description}, ${doorcode})', req.body).then(function(){
@@ -56,6 +74,18 @@ function addDoor(req, res, next){
 	}).catch(function(err) {
 		return next(err);
 	});
+
+
+
+
+
+		}
+})
+.catch(function (err) {
+	return next(err);
+});
+
+
 }
 
 
