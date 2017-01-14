@@ -9,7 +9,7 @@ $ cd node
 $ npm i  
 ```
 
-### Compile Javascript
+### Compile Pages
 
 ```
 $ cd node  
