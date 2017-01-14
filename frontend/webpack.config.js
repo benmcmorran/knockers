@@ -1,5 +1,6 @@
 var webpack = require('webpack');
 var path = require('path');
+var htmlWebpackPlugin = require('html-webpack-plugin');
 
 var BUILD_DIR = path.resolve(__dirname, 'public');
 var APP_DIR = path.resolve(__dirname, 'app');
@@ -22,6 +23,11 @@ var config = {
       }
     ]
   },
+  plugins: [
+    new htmlWebpackPlugin({
+      title: 'Knockt'
+    })
+  ]
 };
 
 module.exports = config;
