@@ -1,0 +1,44 @@
+@import '../main.scss';
+
+.pagedlist {
+  width: 100%;
+  background-color: #ffffff;
+  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.16), 0 1px 2.5px 0 rgba(0, 0, 0, 0.26);
+}
+
+.pagedlist-header,
+.pagedlistitem {
+  position: relative;
+  width: 94%;
+  padding-left: 3%;
+  padding-right: 3%;
+  display: inline-block;
+  line-height: 3em;
+}
+
+.pagedlist-headertext,
+.pagedlistitem-text {
+  position: absolute;
+  display: inline;
+  vertical-align: middle;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.pagedlist-headertext {
+  font-size: .85em;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.pagedlistitem {
+  border-top: solid 0.5px #e0e0e0;
+}
+
+.pagedlistitem:hover {
+  background: $accent-color-light;
+  transition: background $transition-fast;
+}
+
+.pagedlistitem-text {
+  font-size: .85em;
+}

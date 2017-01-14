@@ -1,0 +1,45 @@
+@import '../main.scss';
+
+.selectcheck {
+  display: inline-block;
+  vertical-align: middle;
+  margin: .5em .5em .5em .5em;
+  width: 2em;
+  height: 2em;
+  circle, line{
+    stroke: #aaa;
+    -webkit-transition: fill $transition-fast, stroke $transition-fast; /* Safari */
+    transition: fill $transition-fast, stroke $transition-fast;
+  }
+}
+
+.selectcheck-svg {
+  width: 2em;
+  height: 2em;
+  -webkit-transition: width $transition-fast, height $transition-fast, margin $transition-fast; /* Safari */
+  transition: width $transition-fast, height $transition-fast, margin $transition-fast;
+}
+
+.selectcheck-svg:active {
+  margin: .25em;
+  width: 1.5em;
+  height: 1.5em;
+}
+
+.selectcheck-svg:hover {
+  cursor: pointer;
+  circle, line {
+    stroke: #666;
+  }
+}
+
+.selectcheck.selected {
+  circle, line {
+    stroke: #fff;
+    fill: $main-color-light;
+  }
+  circle {
+    stroke: $main-color-light;
+  }
+}
+

@@ -25,7 +25,8 @@ var config = {
   },
   plugins: [
     new htmlWebpackPlugin({
-      title: 'Knockt'
+      title: 'Knockt',
+      template: APP_DIR + '/index.template.html'
     })
   ]
 };

@@ -25,7 +25,8 @@
   },
   "scripts": {
     "webpack": "webpack --progress --colors",
-    "start": "DB_USER=alex DB_PASS=hackwpi DB_HOST=130.215.127.139 DB_PORT=5432 DB_NAME=knockers npm run server",
+    "webpack-watch": "webpack --progress --colors --watch",
+    "start": "DB_USER=alex DB_HOST=130.215.127.139 DB_PORT=5432 DB_NAME=knockers npm run server",
     "server": "node server/server.js"
   },
   "repository": {
