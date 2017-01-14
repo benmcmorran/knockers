@@ -25,19 +25,22 @@ public class KnockersFirebaseMessagingService extends FirebaseMessagingService {
 
         if (message.getNotification() != null) {
             Log.d(TAG, "Message body: " + message.getNotification().getBody());
-            sendNotification(message.getNotification().getBody());
+            sendNotification(
+                    message.getNotification().getBody(),
+                    message.getNotification().getTitle()
+            );
         }
     }
 
-    private void sendNotification(String body) {
+    private void sendNotification(String body, String title) {
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
-        Uri notificationSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        Uri notificationSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
         NotificationCompat.Builder notifyBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle("Firebase Cloud Messaging")
+                .setContentTitle(title != null ? title : "Knockt")
                 .setContentText(body)
                 .setAutoCancel(true)
                 .setSound(notificationSound)
