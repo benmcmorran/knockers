@@ -7,7 +7,8 @@
 }
 
 .pagedlist-header,
-.pagedlistitem {
+.pagedlistitem,
+.pagedlist-footer {
   position: relative;
   width: 94%;
   padding-left: 3%;
@@ -25,12 +26,29 @@
   padding-right: 1em;
 }
 
-.pagedlist-headertext {
+// Header
+.pagedlist-headertext,
+.pagedlist-index {
   font-size: .85em;
   color: rgba(0, 0, 0, 0.54);
 }
 
-.pagedlistitem {
+// Footer
+.pagedlist-footer {
+  text-align: right;
+}
+
+.pagedlist-prev,
+.pagedlist-next,
+.pagedlist-index {
+  display: inline-block;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+// PagedlistItem
+.pagedlistitem,
+.pagedlist-footer {
   border-top: solid 0.5px #e0e0e0;
 }
 
