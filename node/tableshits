@@ -1,0 +1,10 @@
+Users table
+Username, Password (hashed), uuid, email.
+
+
+Devices table
+user id, uuid, key shits.
+
+
+Doorbells table
+userid, uuid, Description, doorcode
