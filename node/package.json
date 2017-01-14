@@ -6,7 +6,6 @@
   "dependencies": {
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
-    "node-gcm-service": "^0.2.8",
     "pg": "^6.1.2",
     "push-notification": "^0.1.8"
   },
