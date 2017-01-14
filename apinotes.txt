@@ -1,0 +1,19 @@
+get /qr/blah // generate doorcode qr code (for printing)
+
+get /print/blah
+
+get /ring/blah
+//then loads page which JS-es a post /ring   id = blah
+
+post /create?desc=blah
+	returns 302 page which redirects to a cool
+	//requires user id cookie
+	//session shit from express
+
+get /list/
+	//pass in userid
+	//SORTED by LAST RUNG list of doorbells
+
+get /details/blah -- doorbell
+	//pass in userid to make sure
+	returns
