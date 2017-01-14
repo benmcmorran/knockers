@@ -54,6 +54,8 @@ module.exports = {
   addDoor: addDoor,
   addDevice: addDevice,
   ring: ring,
+  listDevices: listDevices,
+  listDoorbells: listDoorbells
 };
 
 
@@ -65,6 +67,46 @@ function doorcode(){
         text += possible.charAt(Math.floor(Math.random() * possible.length));
 
     return text;
+}
+
+
+function listDoorbells(req, res, next){
+	console.log(req.body);
+	db.any(' select doorbells.description, doorbells.doorcode FROM doorbells where doorbells.user_uuid = $1', req.body.user_uuid).then( function(data) {
+		if(data.length < 1){
+			res.status(404).json({
+				status: 'failure',
+				message: 'unable to find doorbells'
+			});
+		} else {
+			res.status(200).json({
+				status: 'success',
+				data: data
+			});
+		}
+	}).catch(function(err){
+		return next(err);
+	});
+
+}
+function listDevices(req, res, next){
+	console.log(req.body);
+	db.any(' select devices.name FROM devices where devices.user_uuid = $1', req.body.user_uuid).then( function(data) {
+		if(data.length < 1){
+			res.status(404).json({
+				status: 'failure',
+				message: 'unable to find devices'	
+			});
+		} else {
+			res.status(200).json({
+				status: 'success',
+				data: data
+			});
+		}
+	}).catch(function(err){
+		return next(err);
+	});
+
 }
 
 
