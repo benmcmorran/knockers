@@ -4,11 +4,13 @@
   "description": "A virtual doorbell device",
   "main": "server.js",
   "dependencies": {
+    "bcryptjs": "^2.4.0",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "fcm-node": "^1.0.16",
     "pg": "^6.1.2",
-    "push-notification": "^0.1.8"
+    "push-notification": "^0.1.8",
+    "sequelize": "^3.29.0"
   },
   "devDependencies": {
     "css-loader": "^0.26.1",
@@ -23,7 +25,7 @@
   },
   "scripts": {
     "webpack": "webpack --progress --colors",
-    "start": "npm run server",
+    "start": "DB_USER=alex DB_PASS=hackwpi DB_HOST=130.215.127.139 DB_PORT=5432 DB_NAME=knockers npm run server",
     "server": "node server/server.js"
   },
   "repository": {
