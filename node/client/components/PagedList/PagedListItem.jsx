@@ -7,25 +7,42 @@ require('./pagedList.scss');
 
 var PagedListItem = React.createClass({
   getInitialState: function() {
-    return { selected: this.props.isAllSelected };
+    return { selected: this.props.isAllSelected, expanded: false };
   },
   render: function () {
-    var content = this.props.content;
+    let {
+      selected,
+      expanded
+    } = this.state;
+    let {
+      content,
+      columns
+    } = this.props;
 
     return (
       <div className="pagedlistitem">
-        <SelectCheck isSelected={ this.state.selected } onClick={ this._toggleSelect } />
-          { this.props.columns.map(function(column, columnIndex) {
+        <div
+          className="pagedlistitem-name"
+          onClick={ this._onClick } >
+          <SelectCheck 
+            isSelected={ selected } 
+            onClick={ this._toggleSelect } />
+            { columns.map(function(column, columnIndex) {
                 return (
-                    <div
-                        className="pagedlistitem-text"
-                        key={ columnIndex }
-                        style={ column.style }
-                        >
-                        { content[columnIndex] }
-                    </div>
+                  <div
+                    className="pagedlistitem-text"
+                    key={ columnIndex }
+                    style={ column.style }
+                    >
+                    { content[columnIndex] }
+                  </div>
                 )
-          }) }
+            }) }
+        </div>
+        { expanded && (
+          <div className="pagedlistitem-info">
+          </div>
+        ) }
       </div>
     )
   },
@@ -33,13 +50,16 @@ var PagedListItem = React.createClass({
     this.setSelected(!this.state.selected);
   },
   setSelected: function(isSelected) {
-    this.state.selected = isSelected;
-    this.props.list.setItemSelected(this.props.itemIndex, this.state.selected);
-    this.forceUpdate();
+    this.setState({ selected: isSelected });
+    this.props.list.setItemSelected(this.props.itemIndex, isSelected);
+    // this.forceUpdate();
   },
   getSelected: function() {
     return this.state.selected;
   },
+  _onClick: function() {
+    this.setState({ expanded: true });
+  }
 });
 
 module.exports = PagedListItem;

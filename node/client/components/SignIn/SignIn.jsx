@@ -26,7 +26,8 @@ var SignIn = React.createClass({
           onClick={ this._onSubmit }
           type="submit" />
         <Button
-          text={ "Forgot My Password" } />
+          text={ "Forgot My Password" }
+          type="button" />
       </form>
     )
   },

@@ -3,12 +3,16 @@
 .signin {
   display: inline-block;
   text-align: justify;
-  width: 20em;
+  max-width: 26em;
+  min-width: 15em;
+  width: 100%;
   border-radius: 1px;
   background-color: #ffffff;
   box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.16), 0 1px 2.5px 0 rgba(0, 0, 0, 0.26);
   padding: 1em 3em;
   padding-bottom: 2.5em;
+  box-sizing: border-box;
+  
 
   margin-top: 4em;
   .title {

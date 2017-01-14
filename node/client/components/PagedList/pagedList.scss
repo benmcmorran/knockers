@@ -53,9 +53,9 @@
   width: 2em;
   line-height: 2em;
   text-align: center;
-  box-sizing: border-box;
   transition: background $transition-fast;
 }
+
 
 .pagedlist-prev:hover,
 .pagedlist-next:hover {
@@ -65,6 +65,12 @@
 .pagedlist-prev:active,
 .pagedlist-next:active {
   background: $gray-color;
+}
+
+.pagedlist-prev.disabled,
+.pagedlist-next.disabled {
+  background: none;
+  color: $gray-color;
 }
 
 // PagedlistItem

@@ -65,13 +65,13 @@ var PagedList = React.createClass({
             <div className="pagedlist-footer">
                 <div className="pagedlist-index">{ indexText }</div>
                 <div 
-                  className="pagedlist-prev"
+                  className={ "pagedlist-prev" + (startIndex == 0 ? " disabled" : "") }
                   onClick={ this._prevPage }
                   >
                   { "<" }
                 </div>
                 <div 
-                  className="pagedlist-next"
+                  className={ "pagedlist-next" + (endIndex == items.length ? " disabled" : "") }
                   onClick={ this._nextPage }
                   >
                   { ">" }
@@ -106,86 +106,114 @@ var PagedList = React.createClass({
         )
     });
   },
-  _prevPage: function() {
+  _forceUpdateItems: function() {
     var {
-      items,
-      itemsPerPage
-    } = this.props;
-    var {
-      startIndex
-    } = this.state;
-    if (startIndex != 0) {
-      this.state.endIndex = startIndex;
-      this.state.startIndex = Math.max(
-          startIndex - (itemsPerPage ? itemsPerPage : 10),
-          0);
-    }
-    this.forceUpdate();
-  },
-  _nextPage: function() {
-    var {
-      items,
-      itemsPerPage
-    } = this.props;
-    var {
+      startIndex,
       endIndex
     } = this.state;
-    if (endIndex != items.length) {
-      this.state.startIndex = endIndex;
-      this.state.endIndex = Math.min(
-          endIndex + (itemsPerPage ? itemsPerPage : 10),
-          items.length);
+
+    for (var i = startIndex; i < endIndex; i++) {
+      this.refs['item-' + i].forceUpdate();
     }
-    this.forceUpdate();
+  },
+  _prevPage: function() {
+    let {
+      items,
+      itemsPerPage
+    } = this.props;
+    let {
+      startIndex
+    } = this.state;
+
+    if (startIndex != 0) {
+      var newStartIndex = Math.max(startIndex - (itemsPerPage ? itemsPerPage : 10), 0)
+      var newEndIndex = startIndex;
+      this.setState({
+        startIndex: newStartIndex,
+        endIndex: newEndIndex
+        });
+      this._checkAllSelectionState(newStartIndex, newEndIndex);
+    }
+  },
+  _nextPage: function() {
+    let {
+      items,
+      itemsPerPage
+    } = this.props;
+    let {
+      startIndex,
+      endIndex
+    } = this.state;
+
+    if (endIndex != items.length) {
+      var newStartIndex = endIndex;
+      var newEndIndex = Math.min(endIndex + (itemsPerPage ? itemsPerPage : 10), items.length)
+      this.setState({
+        startIndex: newStartIndex,
+        endIndex: newEndIndex,
+        });
+        
+      this._checkAllSelectionState(newStartIndex, newEndIndex);
+    }
   },
   _toggleSelectAll: function() {
-      this.state.isAllSelected = !this.state.isAllSelected;
-      var {
-        itemsPerPage,
-        startIndex,
-        endIndex
-      } = this.state;
+    var newSelectedState = !this.state.isAllSelected;
+    this.setState({ isAllSelected: newSelectedState });
+    var {
+      itemsPerPage,
+      startIndex,
+      endIndex
+    } = this.state;
 
-      for (var i = startIndex; i < endIndex; i++) {
-        this.refs['item-' + i].setSelected(this.state.isAllSelected);
-      }
-      this.forceUpdate();
+    for (var i = startIndex; i < endIndex; i++) {
+      this.refs['item-' + i].setSelected(newSelectedState);
+    }
   },
   setItemSelected(index, isSelected) {
-      var {
-        startIndex,
-        endIndex
-      } = this.state;
+    let {
+      items
+    } = this.props;
 
-      if (index >= 0 && index < this.props.items.length) {
-          var itemIndex = this.state.itemsSelected.indexOf(index);
-          if (itemIndex < 0) {
-              if (isSelected) {
-                  this.state.itemsSelected.push(index);
-              }
-          } else {
-              if (!isSelected) {
-                  this.state.itemsSelected.splice(itemIndex, 1);
-              }
-          }
-      }
-      var selectedOnPage = 0;
-      for (var i = startIndex; i < endIndex; i++) {
-        if (this.refs['item-' + i].getSelected()) {
-          selectedOnPage++;
+    let {
+      startIndex,
+      endIndex,
+      itemsSelected
+    } = this.state;
+
+    if (index >= 0 && index < items.length) {
+        var itemIndex = itemsSelected.indexOf(index);
+        if (itemIndex < 0) {
+            if (isSelected) {
+                itemsSelected.push(index);
+            }
+        } else {
+            if (!isSelected) {
+                itemsSelected.splice(itemIndex, 1);
+            }
         }
-      }
+    }
 
-      if (selectedOnPage == endIndex - startIndex) {
-          this.state.isAllSelected = true;
-          this.forceUpdate();
+    this._checkAllSelectionState(startIndex, endIndex);
+  },
+  _checkAllSelectionState: function(startIndex, endIndex) {
+    let {
+      itemsSelected
+    } = this.state;
+
+    var selectedOnPage = 0;
+    for (var i = startIndex; i < endIndex; i++) {
+      if (itemsSelected.indexOf(i) != -1) {
+        selectedOnPage++;
       }
-      if (selectedOnPage == 0) {
-          this.state.isAllSelected = false;
-          this.forceUpdate();
-      }
+    }
+
+    if (selectedOnPage == endIndex - startIndex) {
+      this.setState({ isAllSelected: true });
+    }
+    if (selectedOnPage == 0) {
+      this.setState({ isAllSelected: false });
+    }
   }
-
 });
 
 module.exports = PagedList;
