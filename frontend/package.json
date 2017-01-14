@@ -5,9 +5,13 @@
   "main": "index.js",
   "dependencies": {},
   "devDependencies": {
+    "css-loader": "^0.26.1",
     "jsx-loader": "^0.13.2",
+    "node-sass": "^4.3.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "sass-loader": "^4.1.1",
+    "style-loader": "^0.13.1",
     "webpack": "^1.14.0"
   },
   "scripts": {
