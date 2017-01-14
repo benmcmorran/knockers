@@ -10,6 +10,6 @@ var Root = React.createClass({
       </p>
     )
   }
-})
+});
 
 module.exports = Root
