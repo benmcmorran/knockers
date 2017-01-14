@@ -1,4 +1,5 @@
-// components/Root.jsx
+"use strict";
+
 var React = require('react');
 var SelectCheck = require('../SelectCheck/SelectCheck.jsx');
 
@@ -35,6 +36,9 @@ var PagedListItem = React.createClass({
     this.state.selected = isSelected;
     this.props.list.setItemSelected(this.props.itemIndex, this.state.selected);
     this.forceUpdate();
+  },
+  getSelected: function() {
+    return this.state.selected;
   },
 });
 

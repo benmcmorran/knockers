@@ -1,14 +1,19 @@
-// components/Root.jsx
+"use strict";
+
 var React = require('react');
 
 require('./title.scss');
 
 var Title = React.createClass({
   render: function () {
+    let {
+      text
+    } = this.props;
+
     return (
       <div className="title">
         <span className="title-text">
-          { this.props.text }
+          { text }
         </span>
       </div>
     )
