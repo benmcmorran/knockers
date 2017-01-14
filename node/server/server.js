@@ -1,20 +1,8 @@
 let express = require('express'),        // call express
     app = express(),                 // define our app using express
     bodyParser = require('body-parser'),
-    authenticateService = require('./authenticate.service');
+db = require('./db');
 
-authenticateService.addUser({
-    email: 'alex@knockt.com',
-    password: 'hackwpi'
-}).then(()=>{
-    authenticateService.authenticate({
-        email: 'alex@knockt.com',
-        password: 'hackwpi'
-    })
-        .then((isMatch) => {
-            console.log(isMatch);
-        });
-});
 
 var FCM = require('fcm-node');
 
@@ -76,6 +64,8 @@ router.get('/list/', function (req, res) {
 router.get('/list/:id', function (req, res) {
     res.json(req.params.id);
 });
+
+router.post('/adduser', db.addUser);
 
 
 // REGISTER OUR ROUTES -------------------------------
