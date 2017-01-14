@@ -12,9 +12,10 @@
     "pg": "^6.1.2",
     "pg-promise": "^5.5.1",
     "push-notification": "^0.1.8",
-    "sequelize": "^3.29.0",
     "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react-dom": "^15.4.2",
+    "sequelize": "^3.29.0",
+    "uuid": "^3.0.1"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",

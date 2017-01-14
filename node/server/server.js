@@ -66,6 +66,7 @@ router.get('/list/:id', function (req, res) {
 });
 
 router.post('/adduser', db.addUser);
+router.post('/adddoor', db.addDoor);
 
 
 // REGISTER OUR ROUTES -------------------------------

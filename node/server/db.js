@@ -17,6 +17,9 @@ var options = {
 };
 
 
+const uuid = require('uuid/v4');
+
+
 
 var pgp = require('pg-promise')(options);
 var connectionString = `postgres://${dbUsername}:${dbPassword}@${dbHost}:${dbPort}/${dbName}`;
@@ -25,7 +28,35 @@ var db = pgp(connectionString);
 
 module.exports = {
   addUser: addUser,
+  addDoor: addDoor,
 };
+
+
+function doorcode(){
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for( var i=0; i < 10; i++ )
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+}
+
+
+
+function addDoor(req, res, next){
+	console.log(req.body);
+	req.body.genuuid = uuid();
+	req.body.doorcode = doorcode();
+	db.none('insert into doorbells(uuid, user_uuid, description, doorcode)' + ' values ( ${genuuid}, ${user_uuid}, ${description}, ${doorcode})', req.body).then(function(){
+		res.status(200).json({
+			status: 'success',
+			message: 'Added Doorbell'
+		});
+	}).catch(function(err) {
+		return next(err);
+	});
+}
 
 
 function addUser(req, res, next){
@@ -34,7 +65,8 @@ function addUser(req, res, next){
 	.then(function (data) {
 		console.log(data);
 		if(data.length < 1){
-			db.none('insert into users(name, pass, email)' + 'values(${username}, ${password}, ${email})', req.body)
+			req.body.genuuid = uuid();
+			db.none('insert into users(uuid, name, pass, email)' + ' values( ${genuuid}, ${username}, ${password}, ${email})', req.body)
 				.then(function () {
 					res.status(200).json({
 						status: 'success',
