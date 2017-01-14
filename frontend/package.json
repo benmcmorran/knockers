@@ -3,11 +3,20 @@
   "version": "0.0.1",
   "description": "A virtual doorbell device",
   "main": "index.js",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
+    "css-loader": "^0.26.1",
+    "jsx-loader": "^0.13.2",
+    "node-sass": "^4.3.0",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "sass-loader": "^4.1.1",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.14.0"
   },
-  "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "webpack": "webpack --progress --colors",
+    "start": "npm run webpack"
   },
   "repository": {
     "type": "git",
