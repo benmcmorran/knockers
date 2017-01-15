@@ -2,19 +2,19 @@
 
 var React = require('react');
 var Title = require('../Title/Title.jsx');
-var svg1 = require('../../assets/scan code.svg');
-var svg2 = require('../../assets/monitor visitor.svg');
-var svg3 = require('../../assets/edit info.svg');
+var svg1 = require('../../assets/scan_code.svg');
+var svg2 = require('../../assets/monitor_visitor.svg');
+var svg3 = require('../../assets/edit_info.svg');
 
 require('./signIn.scss');
 
 const backgroundColors = [
   "#f4b400",
-  "#000000",
+  "#f4b400",
   "#3e82f7",
-  "#000000",
+  "#3e82f7",
   "#008140",
-  "#000000"
+  "#008140"
 ]
 
 var SignIn = React.createClass({
@@ -39,11 +39,13 @@ var SignIn = React.createClass({
 
     return (
       <div className="signin">
-        <Title text="Welcome to Knockt!" />
         { false && <div id="g-signin2" className="googlebutton"></div> }
         <img className={ "welcomeimage one" + (current == 0 ? '' : ' fade') } src={ svg1 } />
         <img className={ "welcomeimage two" + (current == 2 ? '' : ' fade') } src={ svg2 } />
         <img className={ "welcomeimage thr" + (current == 4 ? '' : ' fade') } src={ svg3 } />
+        <div className={ "title-img one" + (current == 0 ? '' : ' fade') }>Scan code to ring</div>
+        <div className={ "title-img two" + (current == 2 ? '' : ' fade') }>Monitor visitor activity</div>
+        <div className={ "title-img thr" + (current == 4 ? '' : ' fade') }>Edit info on the fly</div>
       </div>
     )
   },

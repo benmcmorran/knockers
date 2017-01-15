@@ -8,6 +8,8 @@
 
   overflow: hidden;
 
+  position: relative;
+
   .title {
     color: white;
   }
@@ -23,11 +25,25 @@
     width: 20em;
     padding: 6em 2em;
     margin: 2em, 0em;
-    transform: translateX(-50%);
+    transform: translateX(-50%) scale(1);
     transition: opacity $transition-slow, transform $transition-slow;
   }
   .welcomeimage.fade {
-    transform: translateX(200%);
+    transform: translateX(-50%) scale(.1);
+    opacity: 0;
+  }
+
+  .title-img {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    top: 22em;
+    color: white;
+    font-size: 1.5em;
+    transition: opacity $transition-slow;
+  }
+
+  .title-img.fade {
     opacity: 0;
   }
 }

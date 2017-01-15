@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="285px" height="356px" viewBox="0 0 285 356" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="285px" height="220px" viewBox="0 0 285 220" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
-    <title>scan code</title>
+    <title>icon</title>
     <desc>Created with Sketch.</desc>
     <defs>
         <linearGradient x1="50%" y1="2.49920281%" x2="50%" y2="97.9651626%" id="linearGradient-1">
@@ -16,15 +16,6 @@
     <g id="Android-Screens" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="Scan-code-screen" transform="translate(-38.000000, -117.000000)">
             <g id="scan-code" transform="translate(38.000000, 117.000000)">
-                <g id="text" transform="translate(12.000000, 280.000000)" font-weight="400" font-family="Helvetica, sans-serif">
-                    <text id="Scan-code-for-dingda" font-size="24" letter-spacing="-0.578823507" fill="#FDFDFE">
-                        <tspan x="0" y="23">Scan code for dingdang</tspan>
-                    </text>
-                    <text id="Notify-resident-wito" font-size="14" line-spacing="18" fill="#F7F7F7">
-                        <tspan x="0" y="54">Notify resident witout knocking door </tspan>
-                        <tspan x="0" y="72">or making phone call.</tspan>
-                    </text>
-                </g>
                 <g id="icon">
                     <path d="M0,204 L285,204 C285,204 222.304107,219.434554 137,219.434554 C50.1183036,219.434554 0,204 0,204 Z" id="Rectangle" fill="url(#linearGradient-1)"></path>
                     <g id="house-and-code" transform="translate(13.000000, 0.000000)">
