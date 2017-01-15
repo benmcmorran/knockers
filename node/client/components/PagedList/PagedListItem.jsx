@@ -5,7 +5,6 @@ var SelectCheck = require('../SelectCheck/SelectCheck.jsx');
 var Button = require('../Button/Button.jsx');
 var glyphPrint = require('../../assets/glyph_print.png')
 var glyphDelete = require('../../assets/glyph_delete.png')
-var tempQr = require('../../assets/qr_example.png')
 
 require('./pagedList.scss');
 
@@ -20,7 +19,8 @@ var PagedListItem = React.createClass({
     } = this.state;
     let {
       content,
-      columns
+      columns,
+      doorcode
     } = this.props;
 
     return (
@@ -51,7 +51,7 @@ var PagedListItem = React.createClass({
           (expanded ? " expanded" : "") } >
           <Button text={ (
             <div className="pagedlistitem-print">
-              <img src={ tempQr } />
+              <img src={ "https://chart.googleapis.com/chart?cht=qr&chs=160x160&chl=" + doorcode } />
               <br />
               <img src={ glyphPrint } />
             </div>

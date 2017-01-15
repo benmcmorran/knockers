@@ -21,7 +21,8 @@ const monthNames = [
   "November", "December"
 ];
 
-const uri = "http://api.knockt.com";
+// const uri = "http://api.knockt.com";
+const uri = "http://130.215.208.188:8080";
 
 var Root = React.createClass({
   componentDidMount: function() {
