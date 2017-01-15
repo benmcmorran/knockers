@@ -97,17 +97,15 @@ var Root = React.createClass({
     );
   },
   signIn: function(googleUser) {
-    this.setState({ state: State.LOAD });
     this.id_token = googleUser.getAuthResponse().id_token;
+
+    this.getDoorbells();
+  },
+  getDoorbells: function() {
+    this.setState({ state: State.LOAD });
 
     var loginReq = new XMLHttpRequest();
     loginReq.open("POST", uri + "/listdoorbells");
-    /*
-    loginReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    loginReq.onreadystatechange = this.receivedDoors.bind(this, loginReq);
-    loginReq.onerror = this.onError.bind(this);
-    loginReq.send("token=" + this.id_token);
-    */
 
     loginReq.setRequestHeader("Content-Type", "application/json");
     loginReq.onreadystatechange = this.receivedDoors.bind(this, loginReq);
@@ -135,15 +133,12 @@ var Root = React.createClass({
     this.setState({ state: State.ERROR });
   },
   addDoor: function(name) {
-    this.setState({ state: State.LOAD });
-    this.id_token = googleUser.getAuthResponse().id_token;
-
-    var loginReq = new XMLHttpRequest();
-    loginReq.open("POST", uri + "/listdoorbells");
-    loginReq.setRequestHeader("Content-type", "application/json");
-    loginReq.onreadystatechange = this.receivedDoors.bind(this, loginReq);
-    loginReq.onerror = this.onError.bind(this);
-    loginReq.send(JSON.stringify({ token: this.id_token, description: name }));
+    var req = new XMLHttpRequest();
+    req.open("POST", uri + "/adddoor");
+    req.setRequestHeader("Content-type", "application/json");
+    req.onreadystatechange = this.getDoorbells;
+    req.onerror = this.onError.bind(this);
+    req.send(JSON.stringify({ token: this.id_token, description: name }));
   },
   deleteDoor: function(id) {
 
