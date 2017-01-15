@@ -16,7 +16,7 @@
     <g id="Android-Screens" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="Scan-code-screen" transform="translate(-38.000000, -117.000000)">
             <g id="scan-code" transform="translate(38.000000, 117.000000)">
-                <g id="text" transform="translate(12.000000, 280.000000)" font-weight="400" font-family="SFUIText-Medium, SF UI Text">
+                <g id="text" transform="translate(12.000000, 280.000000)" font-weight="400" font-family="Helvetica, sans-serif">
                     <text id="Scan-code-for-dingda" font-size="24" letter-spacing="-0.578823507" fill="#FDFDFE">
                         <tspan x="0" y="23">Scan code for dingdang</tspan>
                     </text>
