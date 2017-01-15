@@ -19,6 +19,8 @@ body {
 
 .root .content {
   width: 90%;
+  max-width: 40em;
+  min-width: 24em;
   display: inline-block;
 }
 

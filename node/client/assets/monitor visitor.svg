@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="260px" height="376px" viewBox="0 0 260 376" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+    <title>monitor visitor</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="130" cy="130" r="130"></circle>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="260" height="260" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <circle id="path-3" cx="109" cy="109" r="66"></circle>
+        <mask id="mask-5" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="-6" y="-6" width="144" height="144">
+            <rect x="37" y="37" width="144" height="144" fill="white"></rect>
+            <use xlink:href="#path-3" fill="black"></use>
+        </mask>
+    </defs>
+    <g id="Android-Screens" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Monitor-activity" transform="translate(-50.000000, -97.000000)">
+            <g id="monitor-visitor" transform="translate(50.000000, 97.000000)">
+                <g id="Group" transform="translate(0.000000, 300.000000)" font-weight="400" font-family="SFUIText-Medium, SF UI Text">
+                    <text id="Monitor-visitor-acti" font-size="24" letter-spacing="-0.578823507" fill="#FDFDFE">
+                        <tspan x="0" y="23">Monitor visitor activity</tspan>
+                    </text>
+                    <text id="View-time-and-the-nu" font-size="14" line-spacing="18" fill="#F7F7F7">
+                        <tspan x="0" y="54">View time and the number of time</tspan>
+                        <tspan x="0" y="72">anonymous people visit your house.</tspan>
+                    </text>
+                </g>
+                <g id="icon">
+                    <use id="Oval" stroke="#3774DE" mask="url(#mask-2)" stroke-width="20" fill="#2F64D9" xlink:href="#path-1"></use>
+                    <rect id="Rectangle-12" fill="#C3C3C3" transform="translate(171.566614, 179.522319) rotate(-42.000000) translate(-171.566614, -179.522319) " x="164.566614" y="146.098949" width="14" height="66.8467403"></rect>
+                    <mask id="mask-4" fill="white">
+                        <use xlink:href="#path-3"></use>
+                    </mask>
+                    <g id="Oval-2-Copy">
+                        <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-3"></use>
+                        <use stroke="#C3C3C3" mask="url(#mask-5)" stroke-width="12" xlink:href="#path-3"></use>
+                    </g>
+                    <rect id="Rectangle-13" fill="#FD478D" mask="url(#mask-4)" x="38" y="70" width="210" height="36"></rect>
+                    <text id="1-minutes-ago" mask="url(#mask-4)" font-family="SFUIText-Medium, SF UI Text" font-size="14" font-weight="400" fill="#F7F7F7">
+                        <tspan x="62" y="93">1 minutes ago</tspan>
+                    </text>
+                    <rect id="Rectangle-14-Copy-2" fill="#7CD6FF" mask="url(#mask-4)" x="53" y="108" width="130" height="11"></rect>
+                    <rect id="Rectangle-14-Copy-3" fill="#A3897F" mask="url(#mask-4)" x="53" y="121" width="130" height="11"></rect>
+                    <rect id="Rectangle-14" fill="#FFDEA0" mask="url(#mask-4)" x="53" y="57" width="130" height="11"></rect>
+                    <rect id="Rectangle-14-Copy-4" fill="#79A9FA" mask="url(#mask-4)" x="53" y="134" width="130" height="11"></rect>
+                    <rect id="Rectangle-14-Copy-5" fill="#009687" mask="url(#mask-4)" x="53" y="147" width="130" height="11"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

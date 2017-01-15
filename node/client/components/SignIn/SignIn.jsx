@@ -1,17 +1,19 @@
 "use strict";
 
 var React = require('react');
+var Title = require('../Title/Title.jsx');
 
 require('./signIn.scss');
 
 var SignIn = React.createClass({
   componentDidMount: function() {
-    window.addEventListener('google-loaded', this.loadGapi);
+    // window.addEventListener('google-loaded', this.loadGapi);
   },
   render: function() {
     return (
       <div className="signin">
-        <div id="g-signin2" className="googlebutton"></div>
+        <Title text="Welcome to Knockt!" />
+        { false && <div id="g-signin2" className="googlebutton"></div> }
       </div>
     )
   },
