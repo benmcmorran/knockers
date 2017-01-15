@@ -36,6 +36,8 @@ router.post('/adduser', db.addUser);
 router.post('/adddoor', db.addDoor);
 router.post('/adddevice', db.addDevice);
 router.post('/ring', db.ring);
+router.post('/listdevices', db.listDevices);
+router.post('/listdoorbells', db.listDoorbells);
 
 
 // REGISTER OUR ROUTES -------------------------------
