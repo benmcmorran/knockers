@@ -4,6 +4,7 @@ var React = require('react');
 var SelectCheck = require('../SelectCheck/SelectCheck.jsx');
 var Button = require('../Button/Button.jsx');
 var glyphPrint = require('../../assets/glyph_print.png')
+var glyphDelete = require('../../assets/glyph_delete.png')
 var tempQr = require('../../assets/qr_example.png')
 
 require('./pagedList.scss');
@@ -25,9 +26,14 @@ var PagedListItem = React.createClass({
     return (
       <div className="pagedlistitem" onClick={ this._onClick } >
         <div className="pagedlistitem-name">
-          <SelectCheck 
+          { true && ( <SelectCheck 
             isSelected={ selected } 
-            onClick={ this._toggleSelect } />
+            onClick={ this._toggleSelect } /> ) }
+          <div className="pagedlistitem-delete">
+            <Button
+              text={( <img src={ glyphDelete } /> )}
+              />
+          </div>
             { columns.map(function(column, columnIndex) {
                 return (
                   <div

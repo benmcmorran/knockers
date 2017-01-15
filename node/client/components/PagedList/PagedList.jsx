@@ -56,9 +56,9 @@ var PagedList = React.createClass({
     return (
       <div className="pagedlist">
         <div className="pagedlist-header">
-          <SelectCheck 
+          { ( <SelectCheck 
             onClick={ this._toggleSelectAll } 
-            isSelected={ isAllSelected } />
+            isSelected={ isAllSelected } /> ) }
             {
               columns.map(function(column, columnIndex) {
                 return (
