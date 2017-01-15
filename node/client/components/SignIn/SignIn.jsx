@@ -1,7 +1,6 @@
 "use strict";
 
 var React = require('react');
-var Title = require('../Title/Title.jsx');
 
 require('./signIn.scss');
 
@@ -26,7 +25,6 @@ var SignIn = React.createClass({
   render: function () {
     return (
       <div className="signin">
-        <Title text="Sign In With Google" />
         <div id="g-signin2" className="googlebutton"></div>
       </div>
     )

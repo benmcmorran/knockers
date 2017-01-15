@@ -10,14 +10,16 @@ var Button = React.createClass({
       text,
       fill,
       onClick,
-      type
+      type,
+      disabled
     } = this.props;
 
     return (
       <button
         className={
         "button" +
-        (fill ? " fill" : '') }
+        (fill ? " fill" : '') +
+        (disabled ? " disabled" : '') }
         onClick={ this._onClick }
         type={ type } >
         { text }
@@ -26,13 +28,14 @@ var Button = React.createClass({
   },
   _onClick: function(e) {
     let {
-      onClick
+      onClick,
+      disabled
     } = this.props;
 
     e.preventDefault();
     e.stopPropagation();
 
-    if (onClick) {
+    if (onClick && !disabled) {
       onClick(e);
     }
   }

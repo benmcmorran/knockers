@@ -35,15 +35,21 @@ var TextField = React.createClass({
           type={ type }
           maxLength={ maxLength ? maxLength : 32 } 
           ref="input"
-          onChange={ this._handleChange }
+          onChange={ this._onChange }
           onFocus={ this._onFocus }
           onBlur={ this._onBlur } />
       </div>
     )
   },
-  _handleChange: function(e) {
-    if (this.refs.input.value.length > 0) {
+  _onChange: function(e) {
+    let {
+      onChange
+    } = this.props;
+    if (e.target.value.length > 0) {
       this.setState({ active: true });
+    }
+    if (onChange) {
+      onChange(e);
     }
   },
   _onFocus: function(e) {
@@ -53,6 +59,9 @@ var TextField = React.createClass({
     if (this.refs.input.value.length == 0) {
       this.setState({ active: false });
     }
+  },
+  getValue: function() {
+    return this.refs.input.value;
   }
 });
 
