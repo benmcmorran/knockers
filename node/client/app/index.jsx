@@ -4,4 +4,9 @@ var React = require('react');
 var ReactDom = require('react-dom');
 var Root = require('../components/Root.jsx');
 
-ReactDom.render(<Root />, document.getElementById("app"));
+var app = ReactDom.render(<Root />, document.getElementById("app"));
+
+var loadGapi = function() {
+    console.log("gapi loaded");
+    app.loadGapi();
+}

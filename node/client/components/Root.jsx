@@ -14,9 +14,23 @@ const State = {
   ERROR: "error"
 }
 
-const uri = "http://130.215.208.188:8080";
+const monthNames = [
+  "January", "February", "March",
+  "April", "May", "June", "July",
+  "August", "September", "October",
+  "November", "December"
+];
+
+const uri = "http://api.knockt.com";
 
 var Root = React.createClass({
+  componentDidMount: function() {
+    if (window.location.hash.length > 0) {
+      this.id_token = window.location.hash.slice(1);
+      
+      this.getDoorbells();
+    }
+  },
   getInitialState: function() {
     this.renderers = {};
     this.renderers[State.LOGIN] = this._renderLogin;
@@ -32,7 +46,8 @@ var Root = React.createClass({
 
     return {
       state: State.LOGIN,
-      items: []
+      items: [],
+      doorcodes: []
     }
   },
   render: function () {
@@ -61,7 +76,8 @@ var Root = React.createClass({
   _renderList: function() {
     let {
       items,
-      columns
+      columns,
+      doorcodes
     } = this.state;
 
     return ( <div>
@@ -71,10 +87,11 @@ var Root = React.createClass({
           columns={
             [
               { name: "Description", style: { textAlign: "left" } },
-              { name: "Last Ring", style: {textAlign: "right", right: 0 } }
+              { name: "Last Ring", style: {float: "right", right: "auto" } }
             ]
           }
           items={ items }
+          doorcodes={ doorcodes }
           addDoor={ this.addDoor }
           deleteDoor={ this.deleteDoor } /> 
       </div> );
@@ -90,23 +107,50 @@ var Root = React.createClass({
     );
   },
   signIn: function(googleUser) {
-    this.setState({ state: State.LOAD });
     this.id_token = googleUser.getAuthResponse().id_token;
+
+    console.log(this.id_token);
+
+    this.getDoorbells();
+  },
+  getDoorbells: function() {
+    this.setState({ state: State.LOAD });
 
     var loginReq = new XMLHttpRequest();
     loginReq.open("POST", uri + "/listdoorbells");
-    loginReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    loginReq.setRequestHeader("Content-Type", "application/json");
     loginReq.onreadystatechange = this.receivedDoors.bind(this, loginReq);
     loginReq.onerror = this.onError.bind(this);
-    loginReq.send("token=" + this.id_token);
+    loginReq.send(JSON.stringify({ token: this.id_token }));
   },
   receivedDoors: function(req) {
-    if(req.readyState === XMLHttpRequest.DONE && req.status === 200) {
-      console.log("Got doors: " + req.responseText);
-      this.setState({ items: JSON.parse(req.responseText).data.map(function(door) {
-        return [door.description, door.lastrang]; }),
-        state: State.LIST
-      });
+    if (req.readyState === XMLHttpRequest.DONE) {
+      if (req.status === 200) {
+        console.log("Got doors: " + req.responseText);
+        var responseData = JSON.parse(req.responseText).data;
+        this.setState({ 
+          items: responseData.map(function(door) {
+            var ringFormat = "Never rung";
+            if (door.lastrang) {
+              var ringTime = new Date(door.lastrang);
+              console.log(ringTime);
+              ringFormat = ("0" + ringTime.getHours()).slice(-2) + ':' + ("0" + ringTime.getMinutes()).slice(-2) + ' ' + monthNames[ringTime.getMonth()] + ' ' + ringTime.getDate() + ', ' + (1900 + ringTime.getYear());
+            }
+            return [door.description, ringFormat]; }),
+          doorcodes: responseData.map(function(door) {
+            return door.doorcode;
+          }),
+          state: State.LIST
+        });
+      }
+      if (req.status === 404) {
+        this.setState({ 
+          items: [],
+          doorcodes: [],
+          state: State.LIST
+        });
+      }
     } else {
       this.setState({ state: State.ERROR });
     }
@@ -114,25 +158,21 @@ var Root = React.createClass({
   onError: function(req) {
     this.setState({ state: State.ERROR });
   },
-  addDoor: function(name) {/*
-    this.setState({ state: State.LIST });
-
-    var id_token = googleUser.getAuthResponse().id_token;
-
-    var loginReq = new XMLHttpRequest();
-    loginReq.open("POST", uri + "/listdoorbells");
-    loginReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    loginReq.onreadystatechange = function() {
-      if(loginReq.readyState === XMLHttpRequest.DONE && loginReq.status === 200) {
-          console.log(loginReq.responseText);
-      }
-    };
-    loginReq.send("token=" + id_token);
-    console.log(name);
-*/
+  addDoor: function(name) {
+    var req = new XMLHttpRequest();
+    req.open("POST", uri + "/adddoor");
+    req.setRequestHeader("Content-type", "application/json");
+    req.onreadystatechange = this.getDoorbells;
+    req.onerror = this.onError.bind(this);
+    req.send(JSON.stringify({ token: this.id_token, description: name }));
   },
-  deleteDoor: function(id) {
-
+  deleteDoor: function(doorcode) {
+    var req = new XMLHttpRequest();
+    req.open("POST", uri + "/deletedoor");
+    req.setRequestHeader("Content-type", "application/json");
+    req.onreadystatechange = this.getDoorbells;
+    req.onerror = this.onError.bind(this);
+    req.send(JSON.stringify({ token: this.id_token, doorcode: doorcode }));
   }
 });
 

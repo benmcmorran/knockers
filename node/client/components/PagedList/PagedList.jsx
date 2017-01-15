@@ -4,6 +4,8 @@ var React = require('react');
 var SelectCheck = require('../SelectCheck/SelectCheck.jsx');
 var PagedListItem = require('./PagedListItem.jsx');
 var DoorForm = require('../DoorForm/DoorForm.jsx');
+var Button = require('../Button/Button.jsx');
+var glyphDelete = require('../../assets/glyph_delete.png')
 
 require('./pagedList.scss');
 
@@ -56,9 +58,15 @@ var PagedList = React.createClass({
     return (
       <div className="pagedlist">
         <div className="pagedlist-header">
-          <SelectCheck 
+          { ( <SelectCheck 
             onClick={ this._toggleSelectAll } 
-            isSelected={ isAllSelected } />
+            isSelected={ isAllSelected } /> ) }
+            <div className="pagedlistitem-delete">
+              <Button
+                text={( <img src={ glyphDelete }
+                disabled={ true } /> )}
+                />
+            </div>
             {
               columns.map(function(column, columnIndex) {
                 return (
@@ -112,7 +120,11 @@ var PagedList = React.createClass({
     )
   },
   _renderPage: function() {
-    var { columns } = this.props;
+    var {
+      columns,
+      doorcodes,
+      deleteDoor
+    } = this.props;
     var {
       isAllSelected,
       startIndex,
@@ -124,14 +136,16 @@ var PagedList = React.createClass({
         var itemIndex = index + startIndex;
         return (
             <PagedListItem 
-                columns={ columns }
-                content={ item }
-                key={ itemIndex }
-                itemIndex={ itemIndex }
-                isAllSelected={ isAllSelected }
-                list= { list }
-                ref={ 'item-' + itemIndex }
-                />
+              columns={ columns }
+              content={ item }
+              key={ itemIndex }
+              itemIndex={ itemIndex }
+              isAllSelected={ isAllSelected }
+              list= { list }
+              ref={ 'item-' + itemIndex }
+              doorcode={ doorcodes[itemIndex] }
+              deleteDoor={ deleteDoor }
+              />
         )
     });
   },

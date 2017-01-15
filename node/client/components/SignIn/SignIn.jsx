@@ -6,6 +6,16 @@ require('./signIn.scss');
 
 var SignIn = React.createClass({
   componentDidMount: function() {
+    window.addEventListener('google-loaded', this.loadGapi);
+  },
+  render: function() {
+    return (
+      <div className="signin">
+        <div id="g-signin2" className="googlebutton"></div>
+      </div>
+    )
+  },
+  loadGapi: function() {
     let {
       signIn
     } = this.props;
@@ -20,14 +30,7 @@ var SignIn = React.createClass({
       'onfailure': function() {
         console.log("Failed to log in");
       }
-    });  
-  },
-  render: function () {
-    return (
-      <div className="signin">
-        <div id="g-signin2" className="googlebutton"></div>
-      </div>
-    )
+    });
   }
 });
 

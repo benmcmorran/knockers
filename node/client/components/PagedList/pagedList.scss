@@ -5,6 +5,7 @@
   text-align: justify;
   background-color: #ffffff;
   box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.16), 0 1px 2.5px 0 rgba(0, 0, 0, 0.26);
+  min-width: 28em;
 }
 
 .pagedlist-header,
@@ -20,7 +21,7 @@
 
 .pagedlist-headertext,
 .pagedlistitem-text {
-  position: absolute;
+  position: relative;
   display: inline;
   vertical-align: middle;
   padding-left: 1em;
@@ -164,4 +165,12 @@
   background-color: #a90033;
   width: 90%;
   height: 90%;
+}
+
+.pagedlistitem-delete {
+  float: right;
+}
+
+.pagedlist-header .pagedlistitem-delete {
+  visibility: hidden;
 }
