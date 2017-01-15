@@ -33,6 +33,10 @@ const config = {
             {
                 test: /.png$/,
                 loader: 'file'
+            },
+            {
+                test: /.svg$/,
+                loader: 'file'
             }
         ]
     },
