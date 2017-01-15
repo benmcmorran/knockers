@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="703-4V-yAM">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Tutorial View Controller-->
+        <scene sceneID="clB-vc-fyl">
+            <objects>
+                <viewController id="703-4V-yAM" customClass="TutorialViewController" customModule="Knockt" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="I7W-xW-C47"/>
+                        <viewControllerLayoutGuide type="bottom" id="IfR-02-kHw"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="502-Ir-ELC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Q3h-pU-vEd" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-101" y="-243"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="snT-py-3hH">
+            <objects>
+                <viewController restorationIdentifier="ScanCodeViewController" storyboardIdentifier="ScanCodeViewController" id="S4R-Ja-viH" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uhG-2M-hcU"/>
+                        <viewControllerLayoutGuide type="bottom" id="pmA-yT-qPJ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="I1b-MW-Oa7">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ScanCodeImage" translatesAutoresizingMaskIntoConstraints="NO" id="XbY-63-lCz">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.95686274509803915" green="0.70588235294117641" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="XbY-63-lCz" firstAttribute="top" secondItem="I1b-MW-Oa7" secondAttribute="top" id="Coh-67-eQf"/>
+                            <constraint firstAttribute="trailing" secondItem="XbY-63-lCz" secondAttribute="trailing" id="bCz-IT-DkW"/>
+                            <constraint firstItem="XbY-63-lCz" firstAttribute="leading" secondItem="I1b-MW-Oa7" secondAttribute="leading" id="eJv-Qd-xhf"/>
+                            <constraint firstItem="pmA-yT-qPJ" firstAttribute="top" secondItem="XbY-63-lCz" secondAttribute="bottom" id="pKH-zT-8ef"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GmD-Rr-ZGN" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="596" y="-243.32833583208398"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="6YL-mr-DFH">
+            <objects>
+                <viewController restorationIdentifier="MonitorActivityController" storyboardIdentifier="MonitorActivityController" id="L33-XG-Kkl" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7gr-oj-9ph"/>
+                        <viewControllerLayoutGuide type="bottom" id="tTi-9L-ZOo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="al5-ne-8Cr">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MonitorVisitorImage" translatesAutoresizingMaskIntoConstraints="NO" id="G6z-3S-f7y">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.24313725490196078" green="0.50980392156862742" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="G6z-3S-f7y" firstAttribute="top" secondItem="al5-ne-8Cr" secondAttribute="top" id="79T-V5-fuM"/>
+                            <constraint firstItem="G6z-3S-f7y" firstAttribute="leading" secondItem="al5-ne-8Cr" secondAttribute="leading" id="Ug2-AN-V72"/>
+                            <constraint firstAttribute="trailing" secondItem="G6z-3S-f7y" secondAttribute="trailing" id="mCE-Vh-WOr"/>
+                            <constraint firstItem="tTi-9L-ZOo" firstAttribute="top" secondItem="G6z-3S-f7y" secondAttribute="bottom" id="p8O-EJ-W1w"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UfV-Kv-923" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1253.5999999999999" y="-243.32833583208398"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="RE3-XF-W6J">
+            <objects>
+                <viewController storyboardIdentifier="EditInfoActivityController" id="rtH-gR-13U" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gHm-9E-SHG"/>
+                        <viewControllerLayoutGuide type="bottom" id="03v-Jh-1gl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="h4S-nx-V0s">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="EditInfoImage" translatesAutoresizingMaskIntoConstraints="NO" id="puV-3q-Eg2">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.50588235294117645" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AZm-uP-Xao" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1925.5999999999999" y="-243.32833583208398"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="EditInfoImage" width="285" height="354"/>
+        <image name="MonitorVisitorImage" width="260" height="376"/>
+        <image name="ScanCodeImage" width="285" height="356"/>
+    </resources>
+</document>
