@@ -27,6 +27,7 @@ var Root = React.createClass({
   componentDidMount: function() {
     if (window.location.hash.length > 0) {
       this.id_token = window.location.hash.slice(1);
+      this.hashed = true;
       
       this.getDoorbells();
     }
@@ -57,7 +58,7 @@ var Root = React.createClass({
 
     return (
       <div className="root">
-        <Navbar signIn={ this.signIn } />
+        <Navbar signIn={ this.signIn } hashed={ this.hashed } />
         <div className="content">
         { this.renderers[state]() }
         </div>
@@ -81,19 +82,19 @@ var Root = React.createClass({
     } = this.state;
 
     return ( <div>
-        <Title text="All My Doors" />
-        <PagedList 
-          ref="list"
-          columns={
-            [
-              { name: "Description", style: { textAlign: "left" } },
-              { name: "Last Ring", style: {float: "right", right: "auto" } }
-            ]
-          }
-          items={ items }
-          doorcodes={ doorcodes }
-          addDoor={ this.addDoor }
-          deleteDoor={ this.deleteDoor } /> 
+      <Title text="All My Doors" />
+      <PagedList 
+        ref="list"
+        columns={
+          [
+            { name: "Description", style: { textAlign: "left" } },
+            { name: "Last Ring", style: {float: "right", right: "auto" } }
+          ]
+        }
+        items={ items }
+        doorcodes={ doorcodes }
+        addDoor={ this.addDoor }
+        deleteDoor={ this.deleteDoor } /> 
       </div> );
   },
   _renderLoad: function() {
