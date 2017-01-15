@@ -25,7 +25,7 @@
 			<string>REVERSED_CLIENT_ID</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.111036379499-2hci7fui9686sp2rdvoj7q4hmonb99t4</string>
+				<string>com.googleusercontent.apps.111036379499-g3qg4q8n838vpne8v2nt6vmfr9rob72t</string>
 			</array>
 		</dict>
 		<dict>
@@ -47,6 +47,11 @@
 	<true/>
 	<key>REVERSED_CLIENT_ID</key>
 	<string>com.googleusercontent.apps.111036379499-2hci7fui9686sp2rdvoj7q4hmonb99t4</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>

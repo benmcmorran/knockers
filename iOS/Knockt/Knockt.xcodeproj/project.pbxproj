@@ -14,7 +14,16 @@
 		FE0835AC1E2AE4EB00E233B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE0835AB1E2AE4EB00E233B4 /* Assets.xcassets */; };
 		FE0835AF1E2AE4EB00E233B4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE0835AD1E2AE4EB00E233B4 /* LaunchScreen.storyboard */; };
 		FE212C5E1E2B059100D9431B /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE212C5D1E2B059100D9431B /* UserNotifications.framework */; };
-		FECC206E1E2B21E500866C6A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FECC206D1E2B21E500866C6A /* GoogleService-Info.plist */; };
+		FE63656B1E2B3DBC00CFD32F /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE63656A1E2B3DBC00CFD32F /* Helpers.swift */; };
+		FE6365701E2B47FC00CFD32F /* DeviceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE63656F1E2B47FC00CFD32F /* DeviceService.swift */; };
+		FE6365721E2B481600CFD32F /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6365711E2B481600CFD32F /* BaseService.swift */; };
+		FE6492081E2B63B200B87954 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FE6492071E2B63B200B87954 /* GoogleService-Info.plist */; };
+		FE64920A1E2B6A4B00B87954 /* DoorRingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6492091E2B6A4B00B87954 /* DoorRingService.swift */; };
+		FE64920C1E2B6B0100B87954 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE64920B1E2B6B0100B87954 /* AuthService.swift */; };
+		FE64920E1E2B6DD300B87954 /* DoorRingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE64920D1E2B6DD300B87954 /* DoorRingTableViewController.swift */; };
+		FE6492101E2B92E100B87954 /* DoorBellDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE64920F1E2B92E100B87954 /* DoorBellDetailViewController.swift */; };
+		FE6492181E2BA91100B87954 /* fallDown.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FE6492171E2BA91100B87954 /* fallDown.mp3 */; };
+		FE64921A1E2BAD0900B87954 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE6492191E2BAD0900B87954 /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,8 +39,17 @@
 		FE0835B01E2AE4EB00E233B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FE212C5D1E2B059100D9431B /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		FE6365671E2B2DE800CFD32F /* Knockt-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Knockt-Bridging-Header.h"; sourceTree = "<group>"; };
+		FE63656A1E2B3DBC00CFD32F /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		FE63656F1E2B47FC00CFD32F /* DeviceService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceService.swift; sourceTree = "<group>"; };
+		FE6365711E2B481600CFD32F /* BaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
+		FE6492071E2B63B200B87954 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FE6492091E2B6A4B00B87954 /* DoorRingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoorRingService.swift; sourceTree = "<group>"; };
+		FE64920B1E2B6B0100B87954 /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		FE64920D1E2B6DD300B87954 /* DoorRingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoorRingTableViewController.swift; sourceTree = "<group>"; };
+		FE64920F1E2B92E100B87954 /* DoorBellDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoorBellDetailViewController.swift; sourceTree = "<group>"; };
+		FE6492171E2BA91100B87954 /* fallDown.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = fallDown.mp3; sourceTree = "<group>"; };
+		FE6492191E2BAD0900B87954 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		FECC206C1E2B14C800866C6A /* Knockt.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Knockt.entitlements; sourceTree = "<group>"; };
-		FECC206D1E2B21E500866C6A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE64921A1E2BAD0900B87954 /* AVFoundation.framework in Frameworks */,
 				FE212C5E1E2B059100D9431B /* UserNotifications.framework in Frameworks */,
 				109DD78A7DAD38B95990F079 /* Pods_Knockt.framework in Frameworks */,
 			);
@@ -59,6 +78,7 @@
 		73F2C49206B4B81C36622B03 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FE6492191E2BAD0900B87954 /* AVFoundation.framework */,
 				FE212C5D1E2B059100D9431B /* UserNotifications.framework */,
 				30160C20A45FE7438FD2CB10 /* Pods_Knockt.framework */,
 			);
@@ -68,6 +88,7 @@
 		FE0835941E2AE4EA00E233B4 = {
 			isa = PBXGroup;
 			children = (
+				FE6492071E2B63B200B87954 /* GoogleService-Info.plist */,
 				FE08359F1E2AE4EA00E233B4 /* Knockt */,
 				FE08359E1E2AE4EA00E233B4 /* Products */,
 				6C15FAD63A44F9A4679C82D6 /* Pods */,
@@ -86,10 +107,12 @@
 		FE08359F1E2AE4EA00E233B4 /* Knockt */ = {
 			isa = PBXGroup;
 			children = (
+				FE6492131E2BA1C600B87954 /* Resources */,
+				FE63656E1E2B47E000CFD32F /* Controllers */,
+				FE63656D1E2B47CF00CFD32F /* Helpers */,
+				FE63656C1E2B47B900CFD32F /* Services */,
 				FECC206C1E2B14C800866C6A /* Knockt.entitlements */,
-				FECC206D1E2B21E500866C6A /* GoogleService-Info.plist */,
 				FE0835A01E2AE4EA00E233B4 /* AppDelegate.swift */,
-				FE0835A21E2AE4EA00E233B4 /* TutorialViewController.swift */,
 				FE0835A81E2AE4EA00E233B4 /* Main.storyboard */,
 				FE0835AB1E2AE4EB00E233B4 /* Assets.xcassets */,
 				FE0835AD1E2AE4EB00E233B4 /* LaunchScreen.storyboard */,
@@ -97,6 +120,43 @@
 				FE6365671E2B2DE800CFD32F /* Knockt-Bridging-Header.h */,
 			);
 			path = Knockt;
+			sourceTree = "<group>";
+		};
+		FE63656C1E2B47B900CFD32F /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				FE63656F1E2B47FC00CFD32F /* DeviceService.swift */,
+				FE6365711E2B481600CFD32F /* BaseService.swift */,
+				FE6492091E2B6A4B00B87954 /* DoorRingService.swift */,
+				FE64920B1E2B6B0100B87954 /* AuthService.swift */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
+		FE63656D1E2B47CF00CFD32F /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				FE63656A1E2B3DBC00CFD32F /* Helpers.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		FE63656E1E2B47E000CFD32F /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				FE0835A21E2AE4EA00E233B4 /* TutorialViewController.swift */,
+				FE64920D1E2B6DD300B87954 /* DoorRingTableViewController.swift */,
+				FE64920F1E2B92E100B87954 /* DoorBellDetailViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		FE6492131E2BA1C600B87954 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				FE6492171E2BA91100B87954 /* fallDown.mp3 */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -175,7 +235,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				FE0835AF1E2AE4EB00E233B4 /* LaunchScreen.storyboard in Resources */,
-				FECC206E1E2B21E500866C6A /* GoogleService-Info.plist in Resources */,
+				FE6492081E2B63B200B87954 /* GoogleService-Info.plist in Resources */,
+				FE6492181E2BA91100B87954 /* fallDown.mp3 in Resources */,
 				FE0835AC1E2AE4EB00E233B4 /* Assets.xcassets in Resources */,
 				FE0835AA1E2AE4EA00E233B4 /* Main.storyboard in Resources */,
 			);
@@ -237,7 +298,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				FE0835A31E2AE4EA00E233B4 /* TutorialViewController.swift in Sources */,
+				FE63656B1E2B3DBC00CFD32F /* Helpers.swift in Sources */,
 				FE0835A11E2AE4EA00E233B4 /* AppDelegate.swift in Sources */,
+				FE6492101E2B92E100B87954 /* DoorBellDetailViewController.swift in Sources */,
+				FE64920A1E2B6A4B00B87954 /* DoorRingService.swift in Sources */,
+				FE6365721E2B481600CFD32F /* BaseService.swift in Sources */,
+				FE64920E1E2B6DD300B87954 /* DoorRingTableViewController.swift in Sources */,
+				FE6365701E2B47FC00CFD32F /* DeviceService.swift in Sources */,
+				FE64920C1E2B6B0100B87954 /* AuthService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +426,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 52E9138D93AEF385CAA9CE65 /* Pods-Knockt.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Knockt/Knockt.entitlements;
@@ -376,6 +445,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1DD4F83B634059F21A44C587 /* Pods-Knockt.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Knockt/Knockt.entitlements;

@@ -45,6 +45,68 @@
             </objects>
             <point key="canvasLocation" x="-101.59999999999999" y="-243.32833583208398"/>
         </scene>
+        <!--Door Ring Table View Controller-->
+        <scene sceneID="zge-gH-nD7">
+            <objects>
+                <tableViewController storyboardIdentifier="DoorRingViewID" id="D9s-0B-RTL" customClass="DoorRingTableViewController" customModule="Knockt" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="WU8-B7-SOh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="reuseIdentifier" id="bsy-sr-kPN">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bsy-sr-kPN" id="i0L-b8-F8U">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="D9s-0B-RTL" id="h6b-0I-GEI"/>
+                            <outlet property="delegate" destination="D9s-0B-RTL" id="8nh-zp-9wc"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZP5-F9-hv5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-106.40000000000001" y="446.62668665667172"/>
+        </scene>
+        <!--Door Bell Detail View Controller-->
+        <scene sceneID="oSU-Gm-Qob">
+            <objects>
+                <viewController storyboardIdentifier="DoorBellDetailView" id="EIQ-h8-wSv" customClass="DoorBellDetailViewController" customModule="Knockt" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="pGd-Qn-Cgd"/>
+                        <viewControllerLayoutGuide type="bottom" id="DWL-N0-Qef"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Vc1-8x-f9e">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fqw-XK-9SL">
+                                <rect key="frame" x="43" y="193" width="289" height="281"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="4Tl-eI-eBG"/>
+                                    <constraint firstAttribute="height" constant="300" id="YSw-lO-yLO"/>
+                                </constraints>
+                            </imageView>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dAU-kg-Gic">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Title" id="dTi-wb-tam"/>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DVJ-bM-vJN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="600.79999999999995" y="439.43028485757122"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="snT-py-3hH">
             <objects>

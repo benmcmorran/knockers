@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
 
     var window: UIWindow?
+    static var deviceTokenStr: String?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -55,6 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // Initialize Google sign-in
         var configureError: NSError?
         GGLContext.sharedInstance().configureWithError(&configureError)
+      //  GIDSignIn.sharedInstance().clientID = "111036379499-0mqihc29hhq2a5ggg235o83hqmadj9ev.apps.googleusercontent.com"
         assert(configureError == nil, "Error configuring Google services: \(configureError)")
         
         return true
@@ -69,10 +71,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func tokenRefreshNotification(notification: NSNotification) {
         // NOTE: It can be nil here
-        let refreshedToken = FIRInstanceID.instanceID().token()
-        print("InstanceID token: \(refreshedToken)")
-        
-        connectToFcm()
+        if let token = FIRInstanceID.instanceID().token() {
+            AppDelegate.deviceTokenStr = token
+            GIDSignIn.sharedInstance().signInSilently()
+        } else {
+          connectToFcm()  
+        }
     }
     
     func connectToFcm() {
@@ -108,10 +112,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     // Called when APNs has assigned the device a unique token
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        print(deviceToken)
         // Convert token to string
-        let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
-        
-        print(deviceTokenString)
         FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.sandbox)
         
         // Persist it in your backend in case it's new
