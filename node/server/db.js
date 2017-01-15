@@ -171,7 +171,7 @@ function addDoor(req, res, next){
 function listDoorbells(req, res, next){
 	console.log(req.body);
 	login(req.body.token, next, function(uuid) {
-		db.any(' select doorbells.description, doorbells.doorcode FROM doorbells where doorbells.user_uuid = $1', uuid).then( function(data) {
+		db.any(' select doorbells.description, doorbells.doorcode, doorbells.lastrang FROM doorbells where doorbells.user_uuid = $1', uuid).then( function(data) {
 			if(data.length < 1){
 				res.status(404).json({
 					status: 'failure',
@@ -219,6 +219,7 @@ function ring(req, res, next){
 	console.log(req.body);
 	db.any(' select devices.regkey from doorbells inner join devices on devices.user_uuid = doorbells.user_uuid where doorbells.doorcode = $1', req.body.doorcode). then(function(data){
 		console.log(data);
+		db.any('update doorbells set lastrang = current_timestamp where doorbells.doorcode = $1', req.body.doorcode).catch(function(err){ return next(err)});
 		if(data.length < 1){
 			res.status(404).json({
 				status: 'failure',
@@ -247,7 +248,6 @@ function ring(req, res, next){
 							message: 'ring'
 						});
 
-			
 		}
 	}).catch(function(err){
 		return next(err);
