@@ -176,3 +176,23 @@
 .pagedlist-header .pagedlistitem-delete {
   visibility: hidden;
 }
+
+// filter
+.list-filter {
+  text-align: left;
+  margin-right: 0;
+  display: inline-block;
+  margin-top: .2em;
+  
+  .textfield {
+    padding: 0;
+    line-height: 2em;
+    .textfield-label {
+      transform: translateY(0em);
+    }
+    input {
+      font-size: .8em;
+      padding-bottom: .1em;
+    }
+  }
+}

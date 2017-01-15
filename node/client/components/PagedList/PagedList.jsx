@@ -4,6 +4,7 @@ var React = require('react');
 var SelectCheck = require('../SelectCheck/SelectCheck.jsx');
 var PagedListItem = require('./PagedListItem.jsx');
 var DoorForm = require('../DoorForm/DoorForm.jsx');
+var TextField = require('../TextField/TextField.jsx');
 var Button = require('../Button/Button.jsx');
 var glyphDelete = require('../../assets/glyph_delete.png')
 
@@ -23,7 +24,8 @@ var PagedList = React.createClass({
         itemsPerPage ? itemsPerPage : 10,
         items.length),
       addingDoor: false,
-      buttonTop: 0
+      buttonTop: 0,
+      filteredItems: items
     };
   },
   componentDidMount: function() {
@@ -43,6 +45,7 @@ var PagedList = React.createClass({
       endIndex: Math.min(
         itemsPerPage ? itemsPerPage : 10,
         items.length),
+      filteredItems: filteredItems
     });
   },
   render: function () {
@@ -56,12 +59,13 @@ var PagedList = React.createClass({
       startIndex,
       endIndex,
       addingDoor,
-      buttonTop
+      buttonTop,
+      filteredItems
     } = this.state;
 
     var indexText = startIndex + 1 + " - " + endIndex;
-    if (items.length > (itemsPerPage ? itemsPerPage : 10)) {
-        indexText += " of " + items.length;
+    if (filteredItems.length > (itemsPerPage ? itemsPerPage : 10)) {
+        indexText += " of " + filteredItems.length;
     }
 
     return (
@@ -70,30 +74,18 @@ var PagedList = React.createClass({
           { ( <SelectCheck 
             onClick={ this._toggleSelectAll } 
             isSelected={ isAllSelected } /> ) }
-            <div className="pagedlistitem-delete">
-              <Button
-                text={( <img src={ glyphDelete }
-                disabled={ true } /> )}
-                />
-            </div>
-            {
-              columns.map(function(column, columnIndex) {
-                return (
-                  <div
-                  className="pagedlist-headertext"
-                  key={ columnIndex }
-                  style={ column.style }
-                  >
-                  { column.name }
-                  </div>
-                )
-              })
-            }
+          <div className="pagedlistitem-delete">
+            <Button
+              text={( <img src={ glyphDelete } /> )}
+              disabled={ true }
+              />
+          </div>
+          { columns.map(this._renderColumnName) }
         </div>
         <div className="pagedlist-items">
             { this._renderPage() }
         </div>
-        { items.length > (itemsPerPage ? itemsPerPage : 10) && (
+        { filteredItems.length > (itemsPerPage ? itemsPerPage : 10) && (
             <div className="pagedlist-footer">
                 <div className="pagedlist-index">{ indexText }</div>
                 <div 
@@ -103,7 +95,7 @@ var PagedList = React.createClass({
                   { "<" }
                 </div>
                 <div 
-                  className={ "pagedlist-next" + (endIndex == items.length ? " disabled" : "") }
+                  className={ "pagedlist-next" + (endIndex == filteredItems.length ? " disabled" : "") }
                   onClick={ this._nextPage }
                   >
                   { ">" }
@@ -140,11 +132,12 @@ var PagedList = React.createClass({
     var {
       isAllSelected,
       startIndex,
-      endIndex
+      endIndex,
+      filteredItems
     } = this.state;
     var list = this;
 
-    return this.props.items.slice(startIndex, endIndex).map(function(item, index) {
+    return filteredItems.slice(startIndex, endIndex).map(function(item, index) {
         var itemIndex = index + startIndex;
         return (
             <PagedListItem 
@@ -161,6 +154,42 @@ var PagedList = React.createClass({
         )
     });
   },
+  _renderColumnName: function(column, columnIndex) {
+    if (column.name == "Description") {
+      return this._renderFilter(columnIndex);
+    }
+    return (
+      <div
+        className="pagedlist-headertext"
+        key={ columnIndex }
+        style={ column.style }
+        >
+        { column.name }
+        </div> );
+  },
+  _renderFilter: function(columnIndex) {
+    return ( 
+      <div className="list-filter"key={ columnIndex } >
+        <TextField 
+          label="Filter"
+          onChange={ this._updateFilter } />
+      </div> );
+  },
+  _updateFilter: function(e) {
+    let {
+      items,
+      itemsPerPage
+    } = this.props;
+    this.setState({
+      filteredItems: items.filter(function(item) {
+        return item[0].includes(e.target.value);
+      }),
+      startIndex: 0,
+      endIndex: Math.min(
+        itemsPerPage ? itemsPerPage : 10,
+        items.length)
+    });
+  },
   _forceUpdateItems: function() {
     var {
       startIndex,
@@ -173,7 +202,6 @@ var PagedList = React.createClass({
   },
   _prevPage: function() {
     let {
-      items,
       itemsPerPage
     } = this.props;
     let {
@@ -192,7 +220,7 @@ var PagedList = React.createClass({
   },
   _nextPage: function() {
     let {
-      items,
+      filteredItems,
       itemsPerPage
     } = this.props;
     let {
@@ -200,9 +228,9 @@ var PagedList = React.createClass({
       endIndex
     } = this.state;
 
-    if (endIndex != items.length) {
+    if (endIndex != filteredItems.length) {
       var newStartIndex = endIndex;
-      var newEndIndex = Math.min(endIndex + (itemsPerPage ? itemsPerPage : 10), items.length)
+      var newEndIndex = Math.min(endIndex + (itemsPerPage ? itemsPerPage : 10), filteredItems.length)
       this.setState({
         startIndex: newStartIndex,
         endIndex: newEndIndex,
