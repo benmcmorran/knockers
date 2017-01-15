@@ -68,11 +68,11 @@ function login(token, next, success, failure){
 	var auth = new GoogleAuth;
 	var client = new auth.OAuth2(CLIENT_ID, '', '');
 	client.verifyIdToken( token, CLIENT_ID, function(e, login) {
-		var payload = login.getPayload();
-		var userid = payload['sub'];
 		if(e != null){
 			failure();
 		} else {
+			var payload = login.getPayload();
+			var userid = payload['sub'];
 			db.any('select users.uuid from users where users.goog = $1', userid).then(function(data){
 				if(data.length < 1){
 					var genuuid = uuidv4();
@@ -134,7 +134,7 @@ function addDevice(req, res, next){
 	login(req.body.token, next, function(uuid){
 			req.body.genuuid = uuidv4();
 			req.body.user_uuid = uuid;
-			db.none('insert into devices(uuid, user_uuid, name, regkey)' + ' values ( ${genuuid}, ${user_uuid}, ${name}, ${regkey})', req.body).then(function(){
+			db.none('insert into devices(uuid, user_uuid, name, regkey)' + ' values( ${genuuid}, ${user_uuid}, ${name}, ${regkey})', req.body).then(function(){
 				res.status(200).json({
 					status: 'success',
 					message: 'Added Device'
