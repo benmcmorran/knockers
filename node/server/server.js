@@ -40,6 +40,7 @@ router.get('/list/:id', function (req, res) {
 });
 
 router.post('/adddoor', db.addDoor);
+router.post('/deletedoor', db.deleteDoor);
 router.post('/adddevice', db.addDevice);
 router.post('/ring', db.ring);
 router.post('/listdevices', db.listDevices);
