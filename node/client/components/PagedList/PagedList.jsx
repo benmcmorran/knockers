@@ -4,6 +4,8 @@ var React = require('react');
 var SelectCheck = require('../SelectCheck/SelectCheck.jsx');
 var PagedListItem = require('./PagedListItem.jsx');
 var DoorForm = require('../DoorForm/DoorForm.jsx');
+var Button = require('../Button/Button.jsx');
+var glyphDelete = require('../../assets/glyph_delete.png')
 
 require('./pagedList.scss');
 
@@ -59,6 +61,12 @@ var PagedList = React.createClass({
           { ( <SelectCheck 
             onClick={ this._toggleSelectAll } 
             isSelected={ isAllSelected } /> ) }
+            <div className="pagedlistitem-delete">
+              <Button
+                text={( <img src={ glyphDelete }
+                disabled={ true } /> )}
+                />
+            </div>
             {
               columns.map(function(column, columnIndex) {
                 return (

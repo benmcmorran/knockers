@@ -24,6 +24,13 @@ const monthNames = [
 const uri = "http://130.215.208.188:8080";
 
 var Root = React.createClass({
+  componentDidMount: function() {
+    if (window.location.hash.length > 0) {
+      this.id_token = window.location.hash.length.slice(1);
+      
+      this.getDoorbells();
+    }
+  },
   getInitialState: function() {
     this.renderers = {};
     this.renderers[State.LOGIN] = this._renderLogin;

@@ -29,11 +29,11 @@ var PagedListItem = React.createClass({
           { true && ( <SelectCheck 
             isSelected={ selected } 
             onClick={ this._toggleSelect } /> ) }
-          <div className="pagedlistitem-delete">
-            <Button
-              text={( <img src={ glyphDelete } /> )}
-              />
-          </div>
+            <div className="pagedlistitem-delete">
+              <Button
+                text={( <img src={ glyphDelete } /> )}
+                />
+            </div>
             { columns.map(function(column, columnIndex) {
                 return (
                   <div

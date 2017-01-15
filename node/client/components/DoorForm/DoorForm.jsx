@@ -23,7 +23,7 @@ var DoorForm = React.createClass({
       <div className="doorform">
         <div className="doorform-overlay" 
           onClick={ closeForm } />
-        <div className="doorform-window">
+        <form className="doorform-window">
           <Title text="Add New Door Bell" />
           <TextField
             ref="textfield"
@@ -33,8 +33,9 @@ var DoorForm = React.createClass({
             text="Add a door" 
             fill={ true }
             onClick={ this._addDoor }
-            disabled={ !valid } />
-        </div>
+            disabled={ !valid }
+            type="submit" />
+        </form>
       </div>
     )
   },
