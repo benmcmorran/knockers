@@ -46,7 +46,7 @@ var options = {
 };
 
 
-const uuid = require('uuid/v4');
+const uuidv4 = require('uuid/v4');
 
 
 
@@ -56,7 +56,6 @@ var db = pgp(connectionString);
 
 
 module.exports = {
-  addUser: addUser,
   addDoor: addDoor,
   addDevice: addDevice,
   ring: ring,
@@ -65,7 +64,7 @@ module.exports = {
 };
 
 
-function login(token, success, failure, next){
+function login(token, next, success, failure){
 	var auth = new GoogleAuth;
 	var client = new auth.OAuth2(CLIENT_ID, '', '');
 	client.verifyIdToken( token, CLIENT_ID, function(e, login) {
@@ -76,7 +75,7 @@ function login(token, success, failure, next){
 		} else {
 			db.any('select users.uuid from users where users.goog = $1', userid).then(function(data){
 				if(data.length < 1){
-					var genuuid = uuid();
+					var genuuid = uuidv4();
 					db.none(' insert into users (uuid, goog) values($1, $2)', [genuuid, userid]).then(function(){
 						success(genuuid);
 					}).catch(function(err){ return next(err); });
@@ -103,11 +102,78 @@ function doorcode(){
 
     return text;
 }
+function addDevice(req, res, next){
+	console.log(req.body);
+	db.any('select * from users WHERE uuid = $1', [req.body.user_uuid])
+	.then(function (data) {
+		console.log(data);
+		if(data.length < 1){
+			res.status(404).json ({
+				status: 'failure',
+				message: 'User does not exist'
+			});
+		} else {
+			req.body.genuuid = uuidv4();
+			db.none('insert into devices(uuid, user_uuid, name, regkey)' + ' values ( ${genuuid}, ${user_uuid}, ${name}, ${regkey})', req.body).then(function(){
+				res.status(200).json({
+					status: 'success',
+					message: 'Added Device'
+				});
+			}).catch(function(err) {
+				return next(err);
+			});
+		}
+	}).catch(function (err) {
+		return next(err);
+	});
+}
+
+
+function addDevice(req, res, next){
+	console.log(req.body);
+	login(req.body.token, next, function(uuid){
+			req.body.genuuid = uuidv4();
+			req.body.user_uuid = uuid;
+			db.none('insert into devices(uuid, user_uuid, name, regkey)' + ' values ( ${genuuid}, ${user_uuid}, ${name}, ${regkey})', req.body).then(function(){
+				res.status(200).json({
+					status: 'success',
+					message: 'Added Device'
+				});
+			}).catch(function(err) {return next(err);});
+	}, function(){
+		res.status(404).json({
+			status: 'failure',
+			message: 'unable to auth'
+		});
+	});
+}
+
+
+function addDoor(req, res, next){
+	console.log(req.body);
+	login(req.body.token, next, function(uuid){
+			req.body.genuuid = uuidv4();
+			req.body.doorcode = doorcode();
+			req.body.user_uuid = uuid;
+			db.none('insert into doorbells(uuid, user_uuid, description, doorcode)' + ' values ( ${genuuid}, ${user_uuid}, ${description}, ${doorcode})', req.body).then(function(){
+				res.status(200).json({
+					status: 'success',
+					message: 'Added Doorbell'
+				});
+			}).catch(function(err) {return next(err);});
+	}, function(){
+		res.status(404).json({
+			status: 'failure',
+			message: 'unable to auth'
+		});
+	});
+}
+
 
 
 function listDoorbells(req, res, next){
 	console.log(req.body);
-	login(req.body.token, function(uuid) {
+	login(req.body.token, next, function(uuid) {
 		db.any(' select doorbells.description, doorbells.doorcode FROM doorbells where doorbells.user_uuid = $1', uuid).then( function(data) {
 			if(data.length < 1){
 				res.status(404).json({
@@ -130,7 +196,7 @@ function listDoorbells(req, res, next){
 }
 function listDevices(req, res, next){
 	console.log(req.body);
-	login(req.body.token, function(uuid) {
+	login(req.body.token, next, function(uuid) {
 		db.any(' select devices.name FROM devices where devices.user_uuid = $1', uuid).then( function(data) {
 			if(data.length < 1){
 				res.status(404).json({
@@ -190,92 +256,3 @@ function ring(req, res, next){
 		return next(err);
 	});
 }
-
-
-
-function addDevice(req, res, next){
-	console.log(req.body);
-	db.any('select * from users WHERE uuid = $1', [req.body.user_uuid])
-	.then(function (data) {
-		console.log(data);
-		if(data.length < 1){
-			res.status(404).json ({
-				status: 'failure',
-				message: 'User does not exist'
-			});
-		} else {
-			req.body.genuuid = uuid();
-			db.none('insert into devices(uuid, user_uuid, name, regkey)' + ' values ( ${genuuid}, ${user_uuid}, ${name}, ${regkey})', req.body).then(function(){
-				res.status(200).json({
-					status: 'success',
-					message: 'Added Device'
-				});
-			}).catch(function(err) {
-				return next(err);
-			});
-		}
-	}).catch(function (err) {
-		return next(err);
-	});
-}
-
-
-
-function addDoor(req, res, next){
-	console.log(req.body);
-	db.any('select * from users WHERE uuid = $1', [req.body.user_uuid])
-	.then(function (data) {
-		console.log(data);
-		if(data.length < 1){
-			res.status(404).json ({
-				status: 'failure',
-				message: 'User does not exist'
-			});
-		} else {
-			req.body.genuuid = uuid();
-			req.body.doorcode = doorcode();
-			db.none('insert into doorbells(uuid, user_uuid, description, doorcode)' + ' values ( ${genuuid}, ${user_uuid}, ${description}, ${doorcode})', req.body).then(function(){
-				res.status(200).json({
-					status: 'success',
-					message: 'Added Doorbell'
-				});
-			}).catch(function(err) {
-				return next(err);
-			});
-		}
-	}).catch(function (err) {
-		return next(err);
-	});
-}
-
-
-function addUser(req, res, next){
-	console.log(req.body);
-	db.any('select * from users WHERE name = $1 OR email = $2', [req.body.username, req.body.email])
-	.then(function (data) {
-		console.log(data);
-		if(data.length < 1){
-			req.body.genuuid = uuid();
-			db.none('insert into users(uuid, name, pass, email)' + ' values( ${genuuid}, ${username}, ${password}, ${email})', req.body)
-				.then(function () {
-					res.status(200).json({
-						status: 'success',
-						message: 'Added user'
-					});
-				})
-			.catch(function(err) {
-				return next(err);
-			});
-		} else {
-			res.status(409).json({
-				status: 'failure',
-				message: 'User or email already exists'
-			});
-		}
-})
-.catch(function (err) {
-	return next(err);
-});
-}
-
-
