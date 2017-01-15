@@ -58,6 +58,7 @@ var db = pgp(connectionString);
 module.exports = {
   addDoor: addDoor,
   deleteDoor: deleteDoor,
+  deleteDevice: deleteDevice,
   addDevice: addDevice,
   ring: ring,
   listDevices: listDevices,
@@ -156,6 +157,22 @@ function deleteDoor(req, res, next){
 		});
 	});
 }
+function deleteDevice(req, res, next){
+	console.log(req.body);
+	login(req.body.token, next, function(uuid){
+			db.none('delete from devices where devices.uuid = $1', req.body.uuid).then(function(){
+				res.status(200).json({
+					status: 'success',
+					message: 'Deleted Device'
+				});
+			}).catch(function(err) {return next(err);});
+	}, function(){
+		res.status(404).json({
+			status: 'failure',
+			message: 'unable to auth'
+		});
+	});
+}
 
 
 
@@ -185,7 +202,7 @@ function listDoorbells(req, res, next){
 function listDevices(req, res, next){
 	console.log(req.body);
 	login(req.body.token, next, function(uuid) {
-		db.any(' select devices.name FROM devices where devices.user_uuid = $1', uuid).then( function(data) {
+		db.any('select devices.name, devices.uuid FROM devices where devices.user_uuid = $1', uuid).then( function(data) {
 			if(data.length < 1){
 				res.status(404).json({
 					status: 'failure',

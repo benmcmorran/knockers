@@ -34,19 +34,9 @@ router.get('/', function (req, res) {
 });
 
 
-router.post('/create/:desc', function (req, res) {
-    res.json({message: 'u fucked up m8'});
-});
-
-router.get('/list/', function (req, res) {
-    res.json({message: 'keker'});
-});
-router.get('/list/:id', function (req, res) {
-    res.json(req.params.id);
-});
-
 router.post('/adddoor', db.addDoor);
 router.post('/deletedoor', db.deleteDoor);
+router.post('/deletedevice', db.deleteDevice);
 router.post('/adddevice', db.addDevice);
 router.post('/ring', db.ring);
 router.post('/listdevices', db.listDevices);
