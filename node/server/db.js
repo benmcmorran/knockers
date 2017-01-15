@@ -6,17 +6,14 @@ var serverKey = 'AAAAGdpIsWs:APA91bFtuYzDLTIHn7PFNCMsi8t3onoTG0p1nr03r2f9EvqybDn
 var fcm = new FCM(serverKey);
 
 var message = { //this may vary according to the message type (single recipient, multicast, topic, et cetera)
-    collapse_key: 'your_collapse_key',
+    collapse_key: 'dingdong',
 
     notification: {
-        title: 'You are',
-        body: 'A fragrant'
+        title: 'DingDong!',
+        body: '',
+	sound:'default',
+	tag: 'dingdong'
     },
-
-    data: {  //you can send only notification or only data(or include both)
-        my_key: 'my value',
-        my_another_key: 'my another value'
-    }
 };
 
 
@@ -225,7 +222,7 @@ function listDevices(req, res, next){
 
 function ring(req, res, next){
 	console.log(req.body);
-	db.any(' select devices.regkey from doorbells inner join devices on devices.user_uuid = doorbells.user_uuid where doorbells.doorcode = $1', req.body.doorcode). then(function(data){
+	db.any(' select devices.regkey, doorbells.description from doorbells inner join devices on devices.user_uuid = doorbells.user_uuid where doorbells.doorcode = $1', req.body.doorcode). then(function(data){
 		console.log(data);
 		db.any('update doorbells set lastrang = current_timestamp where doorbells.doorcode = $1', req.body.doorcode).catch(function(err){ return next(err)});
 		if(data.length < 1){
@@ -236,6 +233,8 @@ function ring(req, res, next){
 		} else {
 			data.forEach( function (d){
 				message.to = d.regkey;
+				message.notification.body = d.description;
+				console.log(message);
 				fcm.send(message, function (err, response) {
 					if (err) {
 //						res.status(404).json({
