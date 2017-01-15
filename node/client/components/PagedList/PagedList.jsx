@@ -25,7 +25,8 @@ var PagedList = React.createClass({
     var {
       columns,
       items,
-      itemsPerPage
+      itemsPerPage,
+      getDoor
     } = this.props;
     var {
       isAllSelected,
@@ -79,6 +80,12 @@ var PagedList = React.createClass({
             </div>
           )
         }
+        <div className="adddoor" onClick={ getDoor } >
+          <svg>
+            <line x1="40%" y1="50%" x2="60%" y2="50%" strokeWidth="3%" />
+            <line x1="50%" y1="40%" x2="50%" y2="60%" strokeWidth="3%" />
+          </svg>
+        </div>
       </div>
     )
   },

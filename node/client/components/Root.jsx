@@ -74,10 +74,14 @@ var Root = React.createClass({
             { name: "Last Run", style: {textAlign: "right", right: 0 } }
           ]
         }
-        items={ items } /> 
+        items={ items } 
+        getDoor={ this.getDoor } /> 
       </div> );
   },
   signIn: function(googleUser) {
+    this.setState({ state: State.LIST });
+
+    /*
     var id_token = googleUser.getAuthResponse().id_token;
     var formData = new FormData();
     formData.append("token", id_token);
@@ -86,10 +90,13 @@ var Root = React.createClass({
     loginReq.open("POST", uri + "/list/doorbells");
     loginReq.onreadystatechange = function() {
       if(loginReq.readyState === XMLHttpRequest.DONE && loginReq.status === 200) {
-          console.log(xhr.responseText);
+          console.log(loginReq.responseText);
       }
     };
-    loginReq.send(formData);
+    loginReq.send(formData);*/
+  },
+  addDoor: function() {
+
   }
 });
 
