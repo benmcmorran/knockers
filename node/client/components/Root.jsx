@@ -46,7 +46,8 @@ var Root = React.createClass({
 
     return {
       state: State.LOGIN,
-      items: []
+      items: [],
+      doorcodes: []
     }
   },
   render: function () {
@@ -75,7 +76,8 @@ var Root = React.createClass({
   _renderList: function() {
     let {
       items,
-      columns
+      columns,
+      doorcodes
     } = this.state;
 
     return ( <div>
@@ -89,6 +91,7 @@ var Root = React.createClass({
             ]
           }
           items={ items }
+          doorcodes={ doorcodes }
           addDoor={ this.addDoor }
           deleteDoor={ this.deleteDoor } /> 
       </div> );
@@ -120,18 +123,32 @@ var Root = React.createClass({
     loginReq.send(JSON.stringify({ token: this.id_token }));
   },
   receivedDoors: function(req) {
-    if(req.readyState === XMLHttpRequest.DONE && req.status === 200) {
-      console.log("Got doors: " + req.responseText);
-      this.setState({ items: JSON.parse(req.responseText).data.map(function(door) {
-        var ringFormat = "Never rung";
-        if (door.lastrang) {
-          var ringTime = new Date(door.lastrang);
-          console.log(ringTime);
-          ringFormat = ("0" + ringTime.getHours()).slice(-2) + ':' + ("0" + ringTime.getMinutes()).slice(-2) + ' ' + monthNames[ringTime.getMonth()] + ' ' + ringTime.getDate() + ', ' + (1900 + ringTime.getYear());
-        }
-        return [door.description, ringFormat]; }),
-        state: State.LIST
-      });
+    if (req.readyState === XMLHttpRequest.DONE) {
+      if (req.status === 200) {
+        console.log("Got doors: " + req.responseText);
+        var responseData = JSON.parse(req.responseText).data;
+        this.setState({ 
+          items: responseData.map(function(door) {
+            var ringFormat = "Never rung";
+            if (door.lastrang) {
+              var ringTime = new Date(door.lastrang);
+              console.log(ringTime);
+              ringFormat = ("0" + ringTime.getHours()).slice(-2) + ':' + ("0" + ringTime.getMinutes()).slice(-2) + ' ' + monthNames[ringTime.getMonth()] + ' ' + ringTime.getDate() + ', ' + (1900 + ringTime.getYear());
+            }
+            return [door.description, ringFormat]; }),
+          doorcodes: responseData.map(function(door) {
+            return door.doorcode;
+          }),
+          state: State.LIST
+        });
+      }
+      if (req.status === 404) {
+        this.setState({ 
+          items: [],
+          doorcodes: [],
+          state: State.LIST
+        });
+      }
     } else {
       this.setState({ state: State.ERROR });
     }
@@ -147,8 +164,13 @@ var Root = React.createClass({
     req.onerror = this.onError.bind(this);
     req.send(JSON.stringify({ token: this.id_token, description: name }));
   },
-  deleteDoor: function(id) {
-
+  deleteDoor: function(doorcode) {
+    var req = new XMLHttpRequest();
+    req.open("POST", uri + "/deletedoor");
+    req.setRequestHeader("Content-type", "application/json");
+    req.onreadystatechange = this.getDoorbells;
+    req.onerror = this.onError.bind(this);
+    req.send(JSON.stringify({ token: this.id_token, doorcode: doorcode }));
   }
 });
 

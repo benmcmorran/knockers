@@ -120,7 +120,11 @@ var PagedList = React.createClass({
     )
   },
   _renderPage: function() {
-    var { columns } = this.props;
+    var {
+      columns,
+      doorcodes,
+      deleteDoor
+    } = this.props;
     var {
       isAllSelected,
       startIndex,
@@ -132,14 +136,16 @@ var PagedList = React.createClass({
         var itemIndex = index + startIndex;
         return (
             <PagedListItem 
-                columns={ columns }
-                content={ item }
-                key={ itemIndex }
-                itemIndex={ itemIndex }
-                isAllSelected={ isAllSelected }
-                list= { list }
-                ref={ 'item-' + itemIndex }
-                />
+              columns={ columns }
+              content={ item }
+              key={ itemIndex }
+              itemIndex={ itemIndex }
+              isAllSelected={ isAllSelected }
+              list= { list }
+              ref={ 'item-' + itemIndex }
+              doorcode={ doorcodes[itemIndex] }
+              deleteDoor={ deleteDoor }
+              />
         )
     });
   },

@@ -31,7 +31,8 @@ var PagedListItem = React.createClass({
             onClick={ this._toggleSelect } /> ) }
             <div className="pagedlistitem-delete">
               <Button
-                text={( <img src={ glyphDelete } /> )}
+                text={( <img src={ glyphDelete }
+                onClick={ this.deleteDoor } /> )}
                 />
             </div>
             { columns.map(function(column, columnIndex) {
@@ -80,6 +81,13 @@ var PagedListItem = React.createClass({
   },
   _clickPrint: function() {
     console.log("Print some stuff");
+  },
+  deleteDoor: function() {
+    let {
+      doorcode,
+      deleteDoor
+    } = this.props
+    deleteDoor(doorcode);
   }
 });
 

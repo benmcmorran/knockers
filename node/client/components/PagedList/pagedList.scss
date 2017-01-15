@@ -170,3 +170,7 @@
 .pagedlistitem-delete {
   float: right;
 }
+
+.pagedlist-header .pagedlistitem-delete {
+  visibility: none;
+}
