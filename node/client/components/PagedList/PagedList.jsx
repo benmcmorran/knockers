@@ -169,7 +169,7 @@ var PagedList = React.createClass({
   },
   _renderFilter: function(columnIndex) {
     return ( 
-      <div className="list-filter"key={ columnIndex } >
+      <div className="list-filter" key={ columnIndex } >
         <TextField 
           label="Filter"
           onChange={ this._updateFilter } />
