@@ -131,7 +131,7 @@ function addDevice(req, res, next){
 	login(req.body.token, next, function(uuid){
 			req.body.genuuid = uuidv4();
 			req.body.user_uuid = uuid;
-			db.none('insert into devices(uuid, user_uuid, name, regkey)' + ' values( ${genuuid}, ${user_uuid}, ${name}, ${regkey})', req.body).then(function(){
+			db.none('insert into devices(uuid, user_uuid, name, regkey)' + ' select  ${genuuid}, ${user_uuid}, ${name}, ${regkey} where not exists ( select 1 from devices where regkey = ${regkey})', req.body).then(function(){
 				res.status(200).json({
 					status: 'success',
 					message: 'Added Device'
