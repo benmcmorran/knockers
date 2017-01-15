@@ -85,34 +85,26 @@ var PagedList = React.createClass({
         <div className="pagedlist-items">
             { this._renderPage() }
         </div>
-        { filteredItems.length > (itemsPerPage ? itemsPerPage : 10) && (
-            <div className="pagedlist-footer">
-                <div className="pagedlist-index">{ indexText }</div>
-                <div 
-                  className={ "pagedlist-prev" + (startIndex == 0 ? " disabled" : "") }
-                  onClick={ this._prevPage }
-                  >
-                  { "<" }
-                </div>
-                <div 
-                  className={ "pagedlist-next" + (endIndex == filteredItems.length ? " disabled" : "") }
-                  onClick={ this._nextPage }
-                  >
-                  { ">" }
-                </div>
-            </div>
-          )
-        }
-        <div className="adddoor-container"
-            style={ { "top": buttonTop } } >
-          <div
-            className="adddoor"
-            onClick={ this._openDoorWindow } >
-            <svg>
-              <line x1="40%" y1="50%" x2="60%" y2="50%" strokeWidth="3%" />
-              <line x1="50%" y1="40%" x2="50%" y2="60%" strokeWidth="3%" />
-            </svg>
+        <div className="pagedlist-footer">
+          <div className="doorbutton">
+            <Button
+              text="Add Door"
+              fill="true"
+              />
           </div>
+          <div className="pagedlist-index">{ indexText }</div>
+          <div 
+            className={ "pagedlist-prev" + (startIndex == 0 ? " disabled" : "") }
+            onClick={ this._prevPage }
+            >
+            { "<" }
+          </div>
+          <div 
+            className={ "pagedlist-next" + (endIndex == filteredItems.length ? " disabled" : "") }
+            onClick={ this._nextPage }
+            >
+            { ">" }
+            </div>
         </div>
         { addingDoor &&
           <DoorForm 
