@@ -87,3 +87,30 @@
 .pagedlistitem-text {
   font-size: .85em;
 }
+
+.pagedlistitem-info {
+  text-align: center;
+  img, span, br {
+    line-height: 0em;
+  }
+  button {
+    height: auto;
+  }
+}
+
+.pagedlistitem-print {
+  height: auto;
+  text-align: center;
+  line-height: 1em;
+  margin-bottom: 1em;
+  padding-bottom: 1em;
+  transition: background $transition-fast;
+}
+
+.pagedlistitem-print:hover {
+  background: $light-gray-color;
+}
+
+.pagedlistitem-print:active {
+  background: $gray-color;
+}

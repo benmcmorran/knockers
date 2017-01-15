@@ -18,11 +18,23 @@ var Button = React.createClass({
         className={
         "button" +
         (fill ? " fill" : '') }
-        onClick={ onClick }
+        onClick={ this._onClick }
         type={ type } >
         { text }
       </button>
     )
+  },
+  _onClick: function(e) {
+    let {
+      onClick
+    } = this.props;
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (onClick) {
+      onClick(e);
+    }
   }
 });
 

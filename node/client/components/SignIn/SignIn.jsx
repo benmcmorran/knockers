@@ -31,11 +31,11 @@ var SignIn = React.createClass({
       </form>
     )
   },
-  _onSubmit: function(event) {
+  _onSubmit: function(e) {
     let {
       signIn
     } = this.props;
-    event.preventDefault();
+    
     signIn();
   }
 });

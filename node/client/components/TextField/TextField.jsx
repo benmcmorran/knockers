@@ -28,9 +28,7 @@ var TextField = React.createClass({
         (active ? " active" : '')
         } >
         { label && (
-          <span 
-            className="textfield-label"
-            > { label } </span>
+          <span className="textfield-label"> { label } </span>
         )}
         <input 
           className="textfield-input"
@@ -43,15 +41,15 @@ var TextField = React.createClass({
       </div>
     )
   },
-  _handleChange: function(event) {
+  _handleChange: function(e) {
     if (this.refs.input.value.length > 0) {
       this.setState({ active: true });
     }
   },
-  _onFocus: function(event) {
+  _onFocus: function(e) {
     this.setState({ active: true });
   },
-  _onBlur: function(event) {
+  _onBlur: function(e) {
     if (this.refs.input.value.length == 0) {
       this.setState({ active: false });
     }
