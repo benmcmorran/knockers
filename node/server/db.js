@@ -100,32 +100,6 @@ function doorcode(){
 
     return text;
 }
-function addDevice(req, res, next){
-	console.log(req.body);
-	db.any('select * from users WHERE uuid = $1', [req.body.user_uuid])
-	.then(function (data) {
-		console.log(data);
-		if(data.length < 1){
-			res.status(404).json ({
-				status: 'failure',
-				message: 'User does not exist'
-			});
-		} else {
-			req.body.genuuid = uuidv4();
-			db.none('insert into devices(uuid, user_uuid, name, regkey)' + ' values ( ${genuuid}, ${user_uuid}, ${name}, ${regkey})', req.body).then(function(){
-				res.status(200).json({
-					status: 'success',
-					message: 'Added Device'
-				});
-			}).catch(function(err) {
-				return next(err);
-			});
-		}
-	}).catch(function (err) {
-		return next(err);
-	});
-}
-
 
 function addDevice(req, res, next){
 	console.log(req.body);
@@ -190,9 +164,9 @@ function listDoorbells(req, res, next){
 	login(req.body.token, next, function(uuid) {
 		db.any(' select doorbells.description, doorbells.doorcode, doorbells.lastrang FROM doorbells where doorbells.user_uuid = $1', uuid).then( function(data) {
 			if(data.length < 1){
-				res.status(404).json({
-					status: 'failure',
-					message: 'unable to find doorbells'
+				res.status(200).json({
+					status: 'success',
+					data: data
 				});
 			} else {
 				res.status(200).json({
