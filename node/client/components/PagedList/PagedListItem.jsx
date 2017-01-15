@@ -51,7 +51,7 @@ var PagedListItem = React.createClass({
           (expanded ? " expanded" : "") } >
           <Button text={ (
             <div className="pagedlistitem-print">
-              <img src={ "https://chart.googleapis.com/chart?cht=qr&chs=160x160&chl=" + doorcode } />
+              <img src={ "https://chart.googleapis.com/chart?cht=qr&chs=160x160&chl=http://knockt.com/r.htm%23" + doorcode } />
               <br />
               <img src={ glyphPrint } />
             </div>
@@ -80,7 +80,10 @@ var PagedListItem = React.createClass({
     this.setState({ expanded: !expanded });
   },
   _clickPrint: function() {
-    console.log("Print some stuff");
+    let {
+      doorcode
+    } = this.props;
+    window.open("http://knockt.com/p#" + doorcode, '_blank');
   },
   deleteDoor: function() {
     let {
