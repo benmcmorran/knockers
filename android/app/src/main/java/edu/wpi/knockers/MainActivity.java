@@ -3,11 +3,15 @@ package edu.wpi.knockers;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,14 +53,14 @@ import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
+public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
     private static final String TAG = "MainActivity";
     private static int RC_SIGN_IN = 100;
-    private static final String SERVERHOST = "http://130.215.208.188:8080/adddevice"; //http://130.215.208.188:8080/adddevice/
+    private static final String SERVERHOST = "http://api.knockt.com/adddevice"; //http://130.215.208.188:8080/adddevice/
+    private static final String GLOBAL_URL = "http://knockt.com/";
 
     private GoogleApiClient mGoogleApiClient;
-    private TextView mStatusTextView;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -64,13 +68,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String deviceName;
     private String token;
     private String gToken;
+    private WebView webView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mStatusTextView = (TextView)findViewById(R.id.message);
+        /**
+        final Handler h = new Handler();
+        final int delay = 100; //milliseconds
+
+        h.postDelayed(new Runnable(){
+            public void run(){
+                //do something
+                Log.d(TAG, gToken + ": " + webView.getUrl());
+                h.postDelayed(this, delay);
+            }
+        }, delay);**/
+
+        webView = (WebView) findViewById(R.id.webView);
+        webView.getSettings().setLoadWithOverviewMode(true);
+        webView.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
+        webView.setScrollbarFadingEnabled(false);
+        webView.setVerticalScrollBarEnabled(true);
+        webView.setHorizontalScrollBarEnabled(true);
+
 
         deviceName = android.os.Build.MODEL;
         token = FirebaseInstanceId.getInstance().getToken();
@@ -95,10 +118,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         };
 
-        SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);
+
+        /**SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);
         signInButton.setSize(SignInButton.SIZE_WIDE);
 
-        findViewById(R.id.sign_in_button).setOnClickListener((View.OnClickListener) this);
+        findViewById(R.id.sign_in_button).setOnClickListener((View.OnClickListener) this);**/
 
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
@@ -114,6 +138,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
+
+    }
+
+    private void loadWebViewLoad(WebView webview) {
+        Log.d(TAG, "Loading URL");
+        webview.getSettings().setJavaScriptEnabled(true);
+        webview.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+        webview.getSettings().setSupportMultipleWindows(true);
+        webview.setWebViewClient(new WebViewClient());
+        webview.setWebChromeClient(new WebChromeClient());
+        Log.d(TAG, GLOBAL_URL+"#"+gToken);
+        webview.loadUrl(GLOBAL_URL+"#"+gToken);
     }
 
     @Override
@@ -121,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //to be implemented
     }
 
-    @Override
+    /**@Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.sign_in_button:
@@ -129,7 +165,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             // ...
         }
-    }
+    }**/
 
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
@@ -159,21 +195,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    mStatusTextView.setText("Welcome, " + acct.getDisplayName());
-                }
-            });
+            loadWebViewLoad(webView);
         } else {
             // Signed out, show unauthenticated UI
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    mStatusTextView.setText("Authentication failed!");
-                }
-            });
+
         }
     }
 
@@ -243,6 +268,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
+        signIn();
     }
 
     @Override
