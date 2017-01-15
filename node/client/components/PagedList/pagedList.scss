@@ -135,6 +135,15 @@
     font-size: .9em;
     width: auto;
     padding: 0 1em;
+    background-color: #e91f63;
+  }
+
+  .button:hover {
+    background-color: #d90f53;
+  }
+
+  .button:active {
+    background-color: #a90033;
   }
 }
 

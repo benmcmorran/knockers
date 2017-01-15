@@ -90,6 +90,7 @@ var PagedList = React.createClass({
             <Button
               text="Add Door"
               fill="true"
+              onClick={ this._openDoorWindow }
               />
           </div>
           <div className="pagedlist-index">{ indexText }</div>
