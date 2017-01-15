@@ -21,8 +21,7 @@ const monthNames = [
   "November", "December"
 ];
 
-// const uri = "http://api.knockt.com";
-const uri = "http://130.215.208.188:8080";
+const uri = "http://api.knockt.com";
 
 var Root = React.createClass({
   componentDidMount: function() {
@@ -58,7 +57,7 @@ var Root = React.createClass({
 
     return (
       <div className="root">
-        <Navbar />
+        <Navbar signIn={ this.signIn } />
         <div className="content">
         { this.renderers[state]() }
         </div>
