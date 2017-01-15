@@ -98,6 +98,9 @@
     height: auto;
     width: 10em;
   }
+  img {
+    margin: .25em;
+  }
   transition: max-height $transition-slow;
 }
 
@@ -111,7 +114,8 @@
   text-align: center;
   line-height: 1em;
   margin-bottom: 1em;
-  padding-bottom: 1em;
+  padding-bottom: .5em;
+  padding-top: .5em;
   transition: background $transition-fast;
 }
 
