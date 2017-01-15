@@ -17,7 +17,7 @@
     <g id="Android-Screens" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="Monitor-activity" transform="translate(-50.000000, -97.000000)">
             <g id="monitor-visitor" transform="translate(50.000000, 97.000000)">
-                <g id="Group" transform="translate(0.000000, 300.000000)" font-weight="400" font-family="SFUIText-Medium, SF UI Text">
+                <g id="Group" transform="translate(0.000000, 300.000000)" font-weight="400" font-family="Helvetica, sans-serif">
                     <text id="Monitor-visitor-acti" font-size="24" letter-spacing="-0.578823507" fill="#FDFDFE">
                         <tspan x="0" y="23">Monitor visitor activity</tspan>
                     </text>
@@ -37,7 +37,7 @@
                         <use stroke="#C3C3C3" mask="url(#mask-5)" stroke-width="12" xlink:href="#path-3"></use>
                     </g>
                     <rect id="Rectangle-13" fill="#FD478D" mask="url(#mask-4)" x="38" y="70" width="210" height="36"></rect>
-                    <text id="1-minutes-ago" mask="url(#mask-4)" font-family="SFUIText-Medium, SF UI Text" font-size="14" font-weight="400" fill="#F7F7F7">
+                    <text id="1-minutes-ago" mask="url(#mask-4)" font-family="Helvetica, sans-serif" font-size="14" font-weight="400" fill="#F7F7F7">
                         <tspan x="62" y="93">1 minutes ago</tspan>
                     </text>
                     <rect id="Rectangle-14-Copy-2" fill="#7CD6FF" mask="url(#mask-4)" x="53" y="108" width="130" height="11"></rect>
