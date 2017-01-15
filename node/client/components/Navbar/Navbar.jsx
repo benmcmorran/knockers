@@ -30,7 +30,7 @@ var Navbar = React.createClass({
           })
         }
         <div id="g-signin-navbar" className="googlebutton"></div>
-        <div id="knockt-logo-navbar" className="knocktlogo"><img src={ icon } alt="Knockt"/><p>nokt</p></div>
+        <div id="knockt-logo-navbar" className="knocktlogo"><img src={ icon } alt="Knockt"/><p>nockt</p></div>
       </div>
     )
   },
