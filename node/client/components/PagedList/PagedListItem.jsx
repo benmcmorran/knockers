@@ -51,7 +51,7 @@ var PagedListItem = React.createClass({
           (expanded ? " expanded" : "") } >
           <Button text={ (
             <div className="pagedlistitem-print">
-              <img src={ "https://chart.googleapis.com/chart?cht=qr&chs=160x160&chl=http://knockt.com/r.htm%23" + doorcode } />
+              <img src={ "https://chart.googleapis.com/chart?cht=qr&chs=160x160&chl=http://knockt.com/r%23" + doorcode } />
               <br />
               <img src={ glyphPrint } />
             </div>
