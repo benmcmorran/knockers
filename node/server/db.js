@@ -235,6 +235,7 @@ function ring(req, res, next){
 			data.forEach( function (d){
 				message.to = d.regkey;
 				message.notification.body = d.description;
+				message.collapse_key = d.description;
 				console.log(message);
 				fcm.send(message, function (err, response) {
 					if (err) {
