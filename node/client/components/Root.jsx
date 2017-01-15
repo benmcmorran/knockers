@@ -7,41 +7,44 @@ var PagedList = require('./PagedList/PagedList.jsx');
 var SignIn = require('./SignIn/SignIn.jsx');
 require('./main.scss');
 
+const State = {
+  LOGIN: "login",
+  SIGNUP: "signup",
+  LIST: "list"
+}
+
 var Root = React.createClass({
   getInitialState: function() {
-    return {
-      loggedIn: false
-    }
-  },
-  render: function () {
-    var {
-      loggedIn
-    } = this.state;
+    this.renderers = {};
+    this.renderers[State.LOGIN] = this._renderLogin;
+    this.renderers[State.SIGNUP] = this._renderSignup;
+    this.renderers[State.LIST] = this._renderList;
+
+    this.commands = {};
+    this.commands[State.LOGIN] = [];
+    this.commands[State.SIGNUP] = [];
+    this.commands[State.LIST] = [];
 
     var items = [];
     for (var i = 0; i < 20; i++) {
       items.push(["Do0r " + (i + 1), (((i * 32 + 55) * 72) % 58 + 1) + "minutes ago"]);
     }
 
-    var titleText = "All My Doors";
+    return {
+      state: State.LOGIN,
+      items: items
+    }
+  },
+  render: function () {
+    var {
+      state
+    } = this.state;
 
     return (
       <div className="root">
         <Navbar />
         <div className="content">
-        { loggedIn && ( <Title text={ titleText } /> ) }
-        { loggedIn ? 
-          ( <PagedList 
-            columns={
-              [
-                { name: "Description", style: { textAlign: "left" } },
-                { name: "Last Run", style: {textAlign: "right", right: 0 } }
-              ]
-            }
-            items={ items } /> ) :
-            ( <SignIn 
-                signIn={ this.signIn } /> )
-        }
+        { this.renderers[state]() }
         </div>
         <div className="pagefooter">
           Hack@WPI 2017, MIT License
@@ -49,9 +52,31 @@ var Root = React.createClass({
       </div>
     )
   },
+  _renderLogin: function() {
+    return ( <SignIn signIn={ this.signIn } /> );
+  },
+  _renderSignup: function() {
+
+  },
+  _renderList: function() {
+    let {
+      items,
+      columns
+    } = this.state;
+    return ( <div>
+        <Title text="All My Doors" />
+        <PagedList 
+        columns={
+          [
+            { name: "Description", style: { textAlign: "left" } },
+            { name: "Last Run", style: {textAlign: "right", right: 0 } }
+          ]
+        }
+        items={ items } /> 
+      </div> );
+  },
   signIn: function() {
-    console.log("test");
-    this.setState({ loggedIn: true });
+    this.setState({ state: State.LIST });
   }
 });
 

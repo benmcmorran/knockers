@@ -2,6 +2,9 @@
 
 var React = require('react');
 var SelectCheck = require('../SelectCheck/SelectCheck.jsx');
+var Button = require('../Button/Button.jsx');
+var glyphPrint = require('../../assets/glyph_print.png')
+var tempQr = require('../../assets/qr_example.png')
 
 require('./pagedList.scss');
 
@@ -20,10 +23,8 @@ var PagedListItem = React.createClass({
     } = this.props;
 
     return (
-      <div className="pagedlistitem">
-        <div
-          className="pagedlistitem-name"
-          onClick={ this._onClick } >
+      <div className="pagedlistitem" onClick={ this._onClick } >
+        <div className="pagedlistitem-name">
           <SelectCheck 
             isSelected={ selected } 
             onClick={ this._toggleSelect } />
@@ -41,6 +42,14 @@ var PagedListItem = React.createClass({
         </div>
         { expanded && (
           <div className="pagedlistitem-info">
+            <Button text={ (
+              <div className="pagedlistitem-print">
+                <img src={ tempQr } />
+                <br />
+                <img src={ glyphPrint } />
+              </div>
+              ) } 
+              onClick={ this._clickPrint } />
           </div>
         ) }
       </div>
@@ -58,7 +67,14 @@ var PagedListItem = React.createClass({
     return this.state.selected;
   },
   _onClick: function() {
-    this.setState({ expanded: true });
+    let {
+      expanded
+    } = this.state;
+
+    this.setState({ expanded: !expanded });
+  },
+  _clickPrint: function() {
+    console.log("Print some stuff");
   }
 });
 
