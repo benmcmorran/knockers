@@ -8,6 +8,14 @@ var TextField = React.createClass({
   getInitialState: function () {
     return { active: false };
   },
+  componentDidMount() {
+    let {
+      focus
+    } = this.props;
+    if (focus) {
+      this.refs.input.focus();
+    }
+  },
   refs: {
     key: React.ReactInstance,
     input: HTMLElement

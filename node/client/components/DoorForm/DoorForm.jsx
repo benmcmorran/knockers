@@ -28,6 +28,7 @@ var DoorForm = React.createClass({
           <TextField
             ref="textfield"
             label="Describe your doorbell"
+            focus={ true }
             onChange={ this._onChange } />
           <Button 
             text="Add a door" 

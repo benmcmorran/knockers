@@ -22,8 +22,16 @@ var PagedList = React.createClass({
       endIndex: Math.min(
         itemsPerPage ? itemsPerPage : 10,
         items.length),
-      addingDoor: false
+      addingDoor: false,
+      buttonTop: 0
     };
+  },
+  componentDidMount: function() {
+    this.updatebuttonTop();
+    window.addEventListener('scroll', this.updatebuttonTop);
+  },
+  componentWillUnmount: function() {
+    window.removeEventListener('scroll', this.updatebuttonTop);
   },
   componentWillReceiveProps: function(nextProps) {
     let {
@@ -38,16 +46,17 @@ var PagedList = React.createClass({
     });
   },
   render: function () {
-    var {
+    let {
       columns,
       items,
       itemsPerPage
     } = this.props;
-    var {
+    let {
       isAllSelected,
       startIndex,
       endIndex,
-      addingDoor
+      addingDoor,
+      buttonTop
     } = this.state;
 
     var indexText = startIndex + 1 + " - " + endIndex;
@@ -102,8 +111,11 @@ var PagedList = React.createClass({
             </div>
           )
         }
-        <div className="adddoor-container" >
-          <div className="adddoor" onClick={ this._openDoorWindow } >
+        <div className="adddoor-container"
+            style={ { "top": buttonTop } } >
+          <div
+            className="adddoor"
+            onClick={ this._openDoorWindow } >
             <svg>
               <line x1="40%" y1="50%" x2="60%" y2="50%" strokeWidth="3%" />
               <line x1="50%" y1="40%" x2="50%" y2="60%" strokeWidth="3%" />
@@ -270,6 +282,10 @@ var PagedList = React.createClass({
   },
   closeForm: function() {
     this.setState({ addingDoor: false });
+  },
+  updatebuttonTop: function(e) {
+    var newHeight = document.body.clientHeight - 108 - window.scrollY;
+    this.setState({ buttonTop: newHeight });
   }
 });
 

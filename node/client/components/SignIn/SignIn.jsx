@@ -8,13 +8,29 @@ var svg3 = require('../../assets/edit info.svg');
 
 require('./signIn.scss');
 
+const backgroundColors = [
+  "#f4b400",
+  "#000000",
+  "#3e82f7",
+  "#000000",
+  "#008140",
+  "#000000"
+]
+
 var SignIn = React.createClass({
   getInitialState: function() {
     return { current: 0 };
   },
   componentDidMount: function() {
-    setTimeout(this.cycle, 5000);
+    document.body.style.background = "#f4b400";
+    document.body.style.overflow = "hidden";
+    this.timeout = setTimeout(this.cycle, 5000);
     // window.addEventListener('google-loaded', this.loadGapi);
+  },
+  componentWillUnmount: function() {
+    document.body.style.background = "#f2f2f2";
+    document.body.style.overflow = "auto";
+    clearTimeout(this.timeout);
   },
   render: function() {
     let {
@@ -23,10 +39,6 @@ var SignIn = React.createClass({
 
     return (
       <div className="signin">
-        <div className={ "background dark" } />
-        <div className={ "background one" + (current == 0 ? '' : ' fade') } />
-        <div className={ "background two" + (current == 2 ? '' : ' fade') } />
-        <div className={ "background thr" + (current == 4 ? '' : ' fade') } />
         <Title text="Welcome to Knockt!" />
         { false && <div id="g-signin2" className="googlebutton"></div> }
         <img className={ "welcomeimage one" + (current == 0 ? '' : ' fade') } src={ svg1 } />
@@ -40,9 +52,13 @@ var SignIn = React.createClass({
       current
     } = this.state;
 
-    this.setState({ current: (current + 1) % 6 })
+    var nextValue = (current + 1) % 6;
 
-    setTimeout(this.cycle, current % 2 == 0 ? 1000 : 5000);
+    document.body.style.background = backgroundColors[nextValue];
+
+    this.setState({ current: nextValue })
+
+    this.timeout = setTimeout(this.cycle, current % 2 == 0 ? 1000 : 5000);
   },
   loadGapi: function() {
     let {

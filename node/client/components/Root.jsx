@@ -109,7 +109,7 @@ var Root = React.createClass({
   signIn: function(googleUser) {
     this.id_token = googleUser.getAuthResponse().id_token;
 
-    console.log(this.id_token);
+    // console.log(this.id_token);
 
     this.getDoorbells();
   },
@@ -121,20 +121,19 @@ var Root = React.createClass({
 
     loginReq.setRequestHeader("Content-Type", "application/json");
     loginReq.onreadystatechange = this.receivedDoors.bind(this, loginReq);
-    loginReq.onerror = this.onError.bind(this);
+    loginReq.onerror = this.onError;
     loginReq.send(JSON.stringify({ token: this.id_token }));
   },
   receivedDoors: function(req) {
     if (req.readyState === XMLHttpRequest.DONE) {
       if (req.status === 200) {
-        console.log("Got doors: " + req.responseText);
+        // console.log("Got doors: " + req.responseText);
         var responseData = JSON.parse(req.responseText).data;
         this.setState({ 
           items: responseData.map(function(door) {
             var ringFormat = "Never rung";
             if (door.lastrang) {
               var ringTime = new Date(door.lastrang);
-              console.log(ringTime);
               ringFormat = ("0" + ringTime.getHours()).slice(-2) + ':' + ("0" + ringTime.getMinutes()).slice(-2) + ' ' + monthNames[ringTime.getMonth()] + ' ' + ringTime.getDate() + ', ' + (1900 + ringTime.getYear());
             }
             return [door.description, ringFormat]; }),
@@ -163,7 +162,7 @@ var Root = React.createClass({
     req.open("POST", uri + "/adddoor");
     req.setRequestHeader("Content-type", "application/json");
     req.onreadystatechange = this.getDoorbells;
-    req.onerror = this.onError.bind(this);
+    req.onerror = this.onError;
     req.send(JSON.stringify({ token: this.id_token, description: name }));
   },
   deleteDoor: function(doorcode) {
@@ -171,7 +170,7 @@ var Root = React.createClass({
     req.open("POST", uri + "/deletedoor");
     req.setRequestHeader("Content-type", "application/json");
     req.onreadystatechange = this.getDoorbells;
-    req.onerror = this.onError.bind(this);
+    req.onerror = this.onError;
     req.send(JSON.stringify({ token: this.id_token, doorcode: doorcode }));
   }
 });

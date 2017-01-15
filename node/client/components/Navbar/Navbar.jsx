@@ -7,6 +7,9 @@ var Navbar = React.createClass({
   componentDidMount: function() {
     window.addEventListener('google-loaded', this.loadGapi);
   },
+  componentWillUnmount: function() {
+    window.removeEventListener('google-loaded', this.loagGapi);
+  },
   render: function () {
     let {
       commands

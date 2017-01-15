@@ -10,11 +10,11 @@ body {
   -moz-user-select: none;     /* Firefox all */
   -ms-user-select: none;      /* IE 10+ */
   user-select: none;          /* Likely future */
-  overflow: hidden;
+
+  transition: background-color $transition-slow;
 }
 
 .root {
-  overflow: hidden;
   text-align: center;
 }
 
