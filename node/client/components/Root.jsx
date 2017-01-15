@@ -5,6 +5,8 @@ var Navbar = require('./Navbar/Navbar.jsx');
 var Title = require('./Title/Title.jsx');
 var PagedList = require('./PagedList/PagedList.jsx');
 var SignIn = require('./SignIn/SignIn.jsx');
+var Button = require('./Button/Button.jsx');
+var glyphDownload = require('../assets/glyph_download.png');
 require('./main.scss');
 
 const State = {
@@ -65,8 +67,22 @@ var Root = React.createClass({
         <div className="pagefooter">
           Hack@WPI 2017, MIT License
         </div>
+        { !this.hashed && 
+          <div className="download">
+            <Button text={( <div>
+                <span> Download our Android app </span>
+                <br />
+                <img src={ glyphDownload } />
+              </div> )}
+              onClick={ this._downloadLink } 
+              />
+          </div>}
       </div>
     )
+  },
+  _downloadLink: function() {
+    console.log("test");
+    window.open('http://knockt.com/knockt.apk');
   },
   _renderLogin: function() {
     return ( <SignIn signIn={ this.signIn } /> );

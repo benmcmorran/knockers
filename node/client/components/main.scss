@@ -31,3 +31,29 @@ body {
   font-size: .8em;
   color: $gray-color;
 }
+
+.download {
+  right: 16px;
+  bottom: 32px;
+  font-size: .7em;
+  width: 12em;
+  position: fixed;
+  background-color: white;
+  .button {
+    height: auto;
+    padding: .5em;
+    padding-bottom: 1.5em;
+    color: black;
+    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.16), 0 1px 2.5px 0 rgba(0, 0, 0, 0.26);
+  }
+
+  transition: background-color $transition-fast;
+}
+
+.download:hover {
+  background-color: $light-accent-color;
+}
+
+.download:active {
+  background-color: $light-gray-color;
+}
