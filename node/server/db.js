@@ -1,6 +1,7 @@
 var FCM = require('fcm-node');
 
 var CLIENT_ID = '111036379499-0mqihc29hhq2a5ggg235o83hqmadj9ev.apps.googleusercontent.com';
+var CLIENT_ID2 = '111036379499-g3qg4q8n838vpne8v2nt6vmfr9rob72t.apps.googleusercontent.com';
 
 var serverKey = 'AAAAGdpIsWs:APA91bFtuYzDLTIHn7PFNCMsi8t3onoTG0p1nr03r2f9EvqybDnipMLhKMxPPLX9SM78_f1JhAe_KAyTkbwpMl8uOXBiQIRBpqhdz_2frBC6oamOLysc8wzQB2Bhjmv0giDf8Hj-lheZ';
 var fcm = new FCM(serverKey);
@@ -66,7 +67,7 @@ module.exports = {
 function login(token, next, success, failure){
 	var auth = new GoogleAuth;
 	var client = new auth.OAuth2(CLIENT_ID, '', '');
-	client.verifyIdToken( token, CLIENT_ID, function(e, login) {
+	client.verifyIdToken( token, [CLIENT_ID, CLIENT_ID2], function(e, login) {
 		if(e != null){
 			failure();
 		} else {

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Knockt</title>
+    </head>
+    <body>
+        <script>
+var hash = window.location.hash.substring(1);
+var img = document.createElement('img');
+img.setAttribute('src', 'https://chart.googleapis.com/chart?cht=qr&chs=500x500&chl=knockt.com/r%23' + hash + '&chld=Q');
+document.body.appendChild(img);
+window.print();
+        </script>
+    </body>
+</html>
