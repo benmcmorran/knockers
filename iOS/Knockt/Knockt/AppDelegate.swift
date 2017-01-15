@@ -9,9 +9,11 @@
 import UIKit
 import Firebase
 import UserNotifications
+import GoogleSignIn
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, FIRMessagingDelegate {
+
     /// The callback to handle data message received via FCM for devices running iOS 10 or above.
     public func applicationReceivedRemoteMessage(_ remoteMessage: FIRMessagingRemoteMessage) {
         print(remoteMessage.appData)
@@ -50,7 +52,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                                                name: .firInstanceIDTokenRefresh,
                                                object: nil)
         
+        // Initialize Google sign-in
+        var configureError: NSError?
+        GGLContext.sharedInstance().configureWithError(&configureError)
+        assert(configureError == nil, "Error configuring Google services: \(configureError)")
+        
         return true
+    }
+    
+    func application(_ app: UIApplication,
+                              open url: URL,
+                              options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool{
+        return GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String,
+                                                            annotation: options[UIApplicationOpenURLOptionsKey.annotation])
     }
     
     func tokenRefreshNotification(notification: NSNotification) {

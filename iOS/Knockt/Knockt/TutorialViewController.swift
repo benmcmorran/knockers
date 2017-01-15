@@ -9,12 +9,14 @@
 import UIKit
 import Firebase
 import UserNotifications
+import GoogleSignIn
 
-class TutorialViewController: UIViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource {
+class TutorialViewController: UIViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource, GIDSignInUIDelegate, GIDSignInDelegate {
 
     var pageViewController: UIPageViewController?
     var pageIdentifiers: [String]?
 
+    @IBOutlet weak var googleSignInButton: GIDSignInButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +41,6 @@ class TutorialViewController: UIViewController, UIPageViewControllerDelegate, UI
         self.pageViewController!.view.frame =  CGRect(x:0, y:0, width:self.view.bounds.size.width, height:self.view.bounds.size.height + 40)
         
         // Firebase
-//        print(FIRAuth.auth()?.currentUser)
         
         let content = UNMutableNotificationContent()
         content.title = "Tutorial Reminder"
@@ -53,8 +54,11 @@ class TutorialViewController: UIViewController, UIPageViewControllerDelegate, UI
             }
         }
         
-        let delegate = UIApplication.shared.delegate as? AppDelegate
-//        delegate?.scheduleNotification(at: NSDate())
+        // Google signin
+        GIDSignIn.sharedInstance().uiDelegate = self
+        GIDSignIn.sharedInstance().signInSilently()
+        self.view.bringSubview(toFront:googleSignInButton)
+        GIDSignIn.sharedInstance().delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -80,7 +84,6 @@ class TutorialViewController: UIViewController, UIPageViewControllerDelegate, UI
     func pageViewController(_ pageViewController: UIPageViewController,
                             viewControllerAfter viewController: UIViewController) -> UIViewController? {
         if let identifier = viewController.restorationIdentifier {
-            print("What?")
             if let index = pageIdentifiers!.index(of: identifier) {
                 if index < pageIdentifiers!.count - 1 {
                     return self.storyboard?.instantiateViewController(withIdentifier: pageIdentifiers![index+1])
@@ -105,6 +108,20 @@ class TutorialViewController: UIViewController, UIPageViewControllerDelegate, UI
     
     override var prefersStatusBarHidden: Bool {
         return true
+    }
+    
+    public func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if (error == nil) {
+            // Perform any operations on signed in user here.
+            print("Signed In")
+            
+        } else {
+            print("\(error.localizedDescription)")
+        }
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+        print("Sign out")
     }
 }
 

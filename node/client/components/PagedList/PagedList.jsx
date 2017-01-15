@@ -3,6 +3,7 @@
 var React = require('react');
 var SelectCheck = require('../SelectCheck/SelectCheck.jsx');
 var PagedListItem = require('./PagedListItem.jsx');
+var DoorForm = require('../DoorForm/DoorForm.jsx');
 
 require('./pagedList.scss');
 
@@ -17,21 +18,34 @@ var PagedList = React.createClass({
       itemsSelected: [], 
       startIndex: 0,
       endIndex: Math.min(
-          itemsPerPage ? itemsPerPage : 10,
-          items.length)
+        itemsPerPage ? itemsPerPage : 10,
+        items.length),
+      addingDoor: false
     };
+  },
+  componentWillReceiveProps: function(nextProps) {
+    let {
+      items,
+      itemsPerPage
+    } = nextProps;
+    this.setState({
+      startIndex: 0,
+      endIndex: Math.min(
+        itemsPerPage ? itemsPerPage : 10,
+        items.length),
+    });
   },
   render: function () {
     var {
       columns,
       items,
-      itemsPerPage,
-      getDoor
+      itemsPerPage
     } = this.props;
     var {
       isAllSelected,
       startIndex,
-      endIndex
+      endIndex,
+      addingDoor
     } = this.state;
 
     var indexText = startIndex + 1 + " - " + endIndex;
@@ -81,13 +95,19 @@ var PagedList = React.createClass({
           )
         }
         <div className="adddoor-container" >
-          <div className="adddoor" onClick={ getDoor } >
+          <div className="adddoor" onClick={ this._openDoorWindow } >
             <svg>
               <line x1="40%" y1="50%" x2="60%" y2="50%" strokeWidth="3%" />
               <line x1="50%" y1="40%" x2="50%" y2="60%" strokeWidth="3%" />
             </svg>
           </div>
         </div>
+        { addingDoor &&
+          <DoorForm 
+            closeForm={ this.closeForm }
+            addDoor={ this._addDoor }
+            />
+        }
       </div>
     )
   },
@@ -222,6 +242,20 @@ var PagedList = React.createClass({
     if (selectedOnPage == 0) {
       this.setState({ isAllSelected: false });
     }
+  },
+  _openDoorWindow: function() {
+    this.setState({ addingDoor: true });
+  },
+  _addDoor: function(name) {
+    let {
+      addDoor
+    } = this.props;
+
+    this.setState({ addingDoor: false });
+    addDoor(name);
+  },
+  closeForm: function() {
+    this.setState({ addingDoor: false });
   }
 });
 

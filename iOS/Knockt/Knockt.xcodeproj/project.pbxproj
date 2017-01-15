@@ -29,6 +29,7 @@
 		FE0835AE1E2AE4EB00E233B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FE0835B01E2AE4EB00E233B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FE212C5D1E2B059100D9431B /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		FE6365671E2B2DE800CFD32F /* Knockt-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Knockt-Bridging-Header.h"; sourceTree = "<group>"; };
 		FECC206C1E2B14C800866C6A /* Knockt.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Knockt.entitlements; sourceTree = "<group>"; };
 		FECC206D1E2B21E500866C6A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -93,6 +94,7 @@
 				FE0835AB1E2AE4EB00E233B4 /* Assets.xcassets */,
 				FE0835AD1E2AE4EB00E233B4 /* LaunchScreen.storyboard */,
 				FE0835B01E2AE4EB00E233B4 /* Info.plist */,
+				FE6365671E2B2DE800CFD32F /* Knockt-Bridging-Header.h */,
 			);
 			path = Knockt;
 			sourceTree = "<group>";
@@ -133,6 +135,7 @@
 					FE08359C1E2AE4EA00E233B4 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 7FQ578KXCA;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -356,12 +359,15 @@
 			baseConfigurationReference = 52E9138D93AEF385CAA9CE65 /* Pods-Knockt.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Knockt/Knockt.entitlements;
 				DEVELOPMENT_TEAM = 7FQ578KXCA;
 				INFOPLIST_FILE = Knockt/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.harryliu.KnocktApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Knockt/Knockt-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -371,12 +377,14 @@
 			baseConfigurationReference = 1DD4F83B634059F21A44C587 /* Pods-Knockt.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Knockt/Knockt.entitlements;
 				DEVELOPMENT_TEAM = 7FQ578KXCA;
 				INFOPLIST_FILE = Knockt/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.harryliu.KnocktApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Knockt/Knockt-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

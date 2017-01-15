@@ -9,32 +9,30 @@ require('./main.scss');
 
 const State = {
   LOGIN: "login",
-  SIGNUP: "signup",
-  LIST: "list"
+  LIST: "list",
+  LOAD: "loading",
+  ERROR: "error"
 }
 
-const uri = "http://localhost:8080";
+const uri = "http://130.215.208.188:8080";
 
 var Root = React.createClass({
   getInitialState: function() {
     this.renderers = {};
     this.renderers[State.LOGIN] = this._renderLogin;
-    this.renderers[State.SIGNUP] = this._renderSignup;
     this.renderers[State.LIST] = this._renderList;
+    this.renderers[State.LOAD] = this._renderLoad;
+    this.renderers[State.ERROR] = this._renderError;
 
     this.commands = {};
     this.commands[State.LOGIN] = [];
-    this.commands[State.SIGNUP] = [];
     this.commands[State.LIST] = [];
-
-    var items = [];
-    for (var i = 0; i < 20; i++) {
-      items.push(["Do0r " + (i + 1), (((i * 32 + 55) * 72) % 58 + 1) + "minutes ago"]);
-    }
+    this.commands[State.LOAD] = [];
+    this.commands[State.ERROR] = [];
 
     return {
       state: State.LOGIN,
-      items: items
+      items: []
     }
   },
   render: function () {
@@ -65,37 +63,75 @@ var Root = React.createClass({
       items,
       columns
     } = this.state;
+
     return ( <div>
         <Title text="All My Doors" />
         <PagedList 
-        columns={
-          [
-            { name: "Description", style: { textAlign: "left" } },
-            { name: "Last Run", style: {textAlign: "right", right: 0 } }
-          ]
-        }
-        items={ items } 
-        getDoor={ this.getDoor } /> 
+          ref="list"
+          columns={
+            [
+              { name: "Description", style: { textAlign: "left" } },
+              { name: "Last Ring", style: {textAlign: "right", right: 0 } }
+            ]
+          }
+          items={ items }
+          addDoor={ this.addDoor }
+          deleteDoor={ this.deleteDoor } /> 
       </div> );
   },
+  _renderLoad: function() {
+    return (
+      <Title text="Loading your doors" />
+    );
+  },
+  _renderError: function() {
+    return (
+      <Title text="Sorry, the server is down!" />
+    );
+  },
   signIn: function(googleUser) {
-    this.setState({ state: State.LIST });
-
-    /*
-    var id_token = googleUser.getAuthResponse().id_token;
-    var formData = new FormData();
-    formData.append("token", id_token);
+    this.setState({ state: State.LOAD });
+    this.id_token = googleUser.getAuthResponse().id_token;
 
     var loginReq = new XMLHttpRequest();
-    loginReq.open("POST", uri + "/list/doorbells");
+    loginReq.open("POST", uri + "/listdoorbells");
+    loginReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    loginReq.onreadystatechange = this.receivedDoors.bind(this, loginReq);
+    loginReq.onerror = this.onError.bind(this);
+    loginReq.send("token=" + this.id_token);
+  },
+  receivedDoors: function(req) {
+    if(req.readyState === XMLHttpRequest.DONE && req.status === 200) {
+      console.log("Got doors: " + req.responseText);
+      this.setState({ items: JSON.parse(req.responseText).data.map(function(door) {
+        return [door.description, door.lastrang]; }),
+        state: State.LIST
+      });
+    } else {
+      this.setState({ state: State.ERROR });
+    }
+  },
+  onError: function(req) {
+    this.setState({ state: State.ERROR });
+  },
+  addDoor: function(name) {/*
+    this.setState({ state: State.LIST });
+
+    var id_token = googleUser.getAuthResponse().id_token;
+
+    var loginReq = new XMLHttpRequest();
+    loginReq.open("POST", uri + "/listdoorbells");
+    loginReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     loginReq.onreadystatechange = function() {
       if(loginReq.readyState === XMLHttpRequest.DONE && loginReq.status === 200) {
           console.log(loginReq.responseText);
       }
     };
-    loginReq.send(formData);*/
+    loginReq.send("token=" + id_token);
+    console.log(name);
+*/
   },
-  addDoor: function() {
+  deleteDoor: function(id) {
 
   }
 });

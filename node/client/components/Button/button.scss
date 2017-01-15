@@ -33,3 +33,8 @@
 .button.fill:active {
   background: $dark-main-color;
 }
+
+.button.fill.disabled {
+  background: $gray-color;
+}
+
