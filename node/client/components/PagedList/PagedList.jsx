@@ -173,14 +173,15 @@ var PagedList = React.createClass({
       items,
       itemsPerPage
     } = this.props;
-    this.setState({
-      filteredItems: items.filter(function(item) {
+    var newItems = items.filter(function(item) {
         return item[0].includes(e.target.value);
-      }),
+      })
+    this.setState({
+      filteredItems: newItems,
       startIndex: 0,
       endIndex: Math.min(
         itemsPerPage ? itemsPerPage : 10,
-        items.length)
+        newItems.length)
     });
   },
   _forceUpdateItems: function() {
