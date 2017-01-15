@@ -104,8 +104,8 @@
 }
 
 .pagedlistitem-info.expanded {
-  max-height: 500px;
-  transition: max-height $transition-slow;
+  max-height: 300px;
+  transition: max-height $transition-med;
 }
 
 .pagedlistitem-print {
