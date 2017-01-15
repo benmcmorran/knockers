@@ -177,7 +177,7 @@ function deleteDevice(req, res, next){
 function listDoorbells(req, res, next){
 	console.log(req.body);
 	login(req.body.token, next, function(uuid) {
-		db.any(' select doorbells.description, doorbells.doorcode, doorbells.lastrang FROM doorbells where doorbells.user_uuid = $1 order by doorbells.lastrang DSC', uuid).then( function(data) {
+		db.any(' select doorbells.description, doorbells.doorcode, doorbells.lastrang FROM doorbells where doorbells.user_uuid = $1 order by doorbells.lastrang DESC', uuid).then( function(data) {
 			if(data.length < 1){
 				res.status(200).json({
 					status: 'success',
