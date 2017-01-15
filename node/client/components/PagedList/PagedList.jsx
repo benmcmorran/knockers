@@ -213,11 +213,11 @@ var PagedList = React.createClass({
   },
   _nextPage: function() {
     let {
-      filteredItems,
       itemsPerPage
     } = this.props;
     let {
       startIndex,
+      filteredItems,
       endIndex
     } = this.state;
 
