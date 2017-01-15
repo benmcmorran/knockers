@@ -39,14 +39,13 @@ var SignIn = React.createClass({
 
     return (
       <div className="signin">
-        <Title text="Welcome to Knockt!" />
         { false && <div id="g-signin2" className="googlebutton"></div> }
         <img className={ "welcomeimage one" + (current == 0 ? '' : ' fade') } src={ svg1 } />
         <img className={ "welcomeimage two" + (current == 2 ? '' : ' fade') } src={ svg2 } />
         <img className={ "welcomeimage thr" + (current == 4 ? '' : ' fade') } src={ svg3 } />
         <div className={ "title-img one" + (current == 0 ? '' : ' fade') }>Scan code to ring</div>
         <div className={ "title-img two" + (current == 2 ? '' : ' fade') }>Monitor visitor activity</div>
-        <div className={ "title-img thr" + (current == 4 ? '' : ' fade') }>Edit info on the fly</div>
+        <div className={ "title-img thr" + (current == 4 ? '' : ' fade') }>Configure multiple bells</div>
       </div>
     )
   },

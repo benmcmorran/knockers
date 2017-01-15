@@ -1,18 +1,32 @@
 // components/Root.jsx
 var React = require('react');
 
+
+var icon = require('../../assets/icon.png');
+
 require('./navbar.scss');
 
 var Navbar = React.createClass({
   componentDidMount: function() {
-    window.addEventListener('google-loaded', this.loadGapi);
+    let {
+      hashed
+    } = this.props;
+    if (!hashed) {
+      window.addEventListener('google-loaded', this.loadGapi);
+    }
   },
   componentWillUnmount: function() {
-    window.removeEventListener('google-loaded', this.loagGapi);
+    let {
+      hashed
+    } = this.props;
+    if (!hashed) {
+      window.removeEventListener('google-loaded', this.loagGapi);
+    }
   },
   render: function () {
     let {
-      commands
+      commands,
+      hashed
     } = this.props;
 
     return (
@@ -26,7 +40,8 @@ var Navbar = React.createClass({
             );
           })
         }
-        <div id="g-signin-navbar" className="googlebutton"></div>
+        { !hashed && <div id="g-signin-navbar" className="googlebutton"></div> }
+        <div id="knockt-logo-navbar" className="knocktlogo"><img src={ icon } alt="Knockt"/><p>nockt</p></div>
       </div>
     )
   },

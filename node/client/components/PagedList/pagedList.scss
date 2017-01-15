@@ -104,8 +104,8 @@
 }
 
 .pagedlistitem-info.expanded {
-  max-height: 500px;
-  transition: max-height $transition-slow;
+  max-height: 300px;
+  transition: max-height $transition-fast;
 }
 
 .pagedlistitem-print {
@@ -127,46 +127,24 @@
 }
 
 // Adddoor button
-.adddoor-container {
-  position: fixed;
-  display: table-cell;
-  right: 4em;
-  z-index: 10;
-  text-align: center;
-  
-  width: 4em;
-  height: 4em;
-}
-
-.adddoor {
+.doorbutton {
+  margin-left: .8em;
   display: inline-block;
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-
-  width: 100%;
-  height: 100%;
-  background-color: #e91f63;
-  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.26), 0 1px 5px 0 rgba(0, 0, 0, 0.16);
-  border-radius: 50%;
-  svg {
-    width: 100%;
-    height: 100%;
-    line {
-      stroke: white;
-    }
+  float: left;
+  .button {
+    font-size: .9em;
+    width: auto;
+    padding: 0 1em;
+    background-color: #e91f63;
   }
-  transition: background-color $transition-fast, width $transition-fast, height $transition-fast;
-}
 
-.adddoor:hover {
-  background-color: #d90f53;
-}
+  .button:hover {
+    background-color: #d90f53;
+  }
 
-.adddoor:active {
-  background-color: #a90033;
-  width: 90%;
-  height: 90%;
+  .button:active {
+    background-color: #a90033;
+  }
 }
 
 .pagedlistitem-delete {
@@ -175,4 +153,25 @@
 
 .pagedlist-header .pagedlistitem-delete {
   visibility: hidden;
+}
+
+// filter
+.list-filter {
+  text-align: left;
+  margin-right: 0;
+  display: inline-block;
+  margin-top: .2em;
+  margin-left: .8em;
+  
+  .textfield {
+    padding: 0;
+    line-height: 2em;
+    .textfield-label {
+      transform: translateY(0em);
+    }
+    input {
+      font-size: .8em;
+      padding-bottom: .1em;
+    }
+  }
 }
