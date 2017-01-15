@@ -13,6 +13,8 @@ const State = {
   LIST: "list"
 }
 
+const uri = "http://localhost:8080";
+
 var Root = React.createClass({
   getInitialState: function() {
     this.renderers = {};
@@ -75,8 +77,19 @@ var Root = React.createClass({
         items={ items } /> 
       </div> );
   },
-  signIn: function() {
-    this.setState({ state: State.LIST });
+  signIn: function(googleUser) {
+    var id_token = googleUser.getAuthResponse().id_token;
+    var formData = new FormData();
+    formData.append("token", id_token);
+
+    var loginReq = new XMLHttpRequest();
+    loginReq.open("POST", uri + "/list/doorbells");
+    loginReq.onreadystatechange = function() {
+      if(loginReq.readyState === XMLHttpRequest.DONE && loginReq.status === 200) {
+          console.log(xhr.responseText);
+      }
+    };
+    loginReq.send(formData);
   }
 });
 

@@ -1,42 +1,35 @@
 "use strict";
 
 var React = require('react');
-var TextField = require('../TextField/TextField.jsx');
 var Title = require('../Title/Title.jsx');
-var Button = require('../Button/Button.jsx');
 
 require('./signIn.scss');
 
 var SignIn = React.createClass({
-  render: function () {
+  componentDidMount: function() {
     let {
       signIn
     } = this.props;
 
-    return (
-      <form 
-        className="signin"
-        onSubmit={ this._onSubmit } >
-        <Title text="Sign In" />
-        <TextField label="Username" />
-        <TextField label="Password" type="password" />
-        <Button
-          fill={ true }
-          text={ "Sign In" }
-          onClick={ this._onSubmit }
-          type="submit" />
-        <Button
-          text={ "Forgot My Password" }
-          type="button" />
-      </form>
-    )
+    gapi.signin2.render('g-signin2', {
+      'scope': 'profile',
+      'width': 240,
+      'height': 50,
+      'longtitle': true,
+      'theme': 'dark',
+      'onsuccess': signIn,
+      'onfailure': function() {
+        console.log("Failed to log in");
+      }
+    });  
   },
-  _onSubmit: function(e) {
-    let {
-      signIn
-    } = this.props;
-    
-    signIn();
+  render: function () {
+    return (
+      <div className="signin">
+        <Title text="Sign In With Google" />
+        <div id="g-signin2" className="googlebutton"></div>
+      </div>
+    )
   }
 });
 
