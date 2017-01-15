@@ -39,7 +39,6 @@ var SignIn = React.createClass({
 
     return (
       <div className="signin">
-        <Title text="Welcome to Knockt!" />
         { false && <div id="g-signin2" className="googlebutton"></div> }
         <img className={ "welcomeimage one" + (current == 0 ? '' : ' fade') } src={ svg1 } />
         <img className={ "welcomeimage two" + (current == 2 ? '' : ' fade') } src={ svg2 } />
