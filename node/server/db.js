@@ -57,6 +57,7 @@ var db = pgp(connectionString);
 
 module.exports = {
   addDoor: addDoor,
+  deleteDoor: deleteDoor,
   addDevice: addDevice,
   ring: ring,
   listDevices: listDevices,
@@ -156,6 +157,22 @@ function addDoor(req, res, next){
 				res.status(200).json({
 					status: 'success',
 					message: 'Added Doorbell'
+				});
+			}).catch(function(err) {return next(err);});
+	}, function(){
+		res.status(404).json({
+			status: 'failure',
+			message: 'unable to auth'
+		});
+	});
+}
+function deleteDoor(req, res, next){
+	console.log(req.body);
+	login(req.body.token, next, function(uuid){
+			db.none('delete from doorbells where doorbells.doorcode = $1', req.body.doorcode).then(function(){
+				res.status(200).json({
+					status: 'success',
+					message: 'Deleted Doorbell'
 				});
 			}).catch(function(err) {return next(err);});
 	}, function(){
