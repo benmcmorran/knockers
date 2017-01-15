@@ -40,18 +40,17 @@ var PagedListItem = React.createClass({
                 )
             }) }
         </div>
-        { expanded && (
-          <div className="pagedlistitem-info">
-            <Button text={ (
-              <div className="pagedlistitem-print">
-                <img src={ tempQr } />
-                <br />
-                <img src={ glyphPrint } />
-              </div>
-              ) } 
-              onClick={ this._clickPrint } />
-          </div>
-        ) }
+        <div className={ "pagedlistitem-info" +
+          (expanded ? " expanded" : "") } >
+          <Button text={ (
+            <div className="pagedlistitem-print">
+              <img src={ tempQr } />
+              <br />
+              <img src={ glyphPrint } />
+            </div>
+            ) } 
+            onClick={ this._clickPrint } />
+        </div>
       </div>
     )
   },

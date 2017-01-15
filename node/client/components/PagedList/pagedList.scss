@@ -76,7 +76,7 @@
 // PagedlistItem
 .pagedlistitem,
 .pagedlist-footer {
-  border-top: solid 0.5px #e0e0e0;
+  border-top: solid 1px #e0e0e0;
 }
 
 .pagedlistitem:hover {
@@ -89,13 +89,20 @@
 }
 
 .pagedlistitem-info {
+  max-height: 0;
+  overflow: hidden;
   text-align: center;
-  img, span, br {
-    line-height: 0em;
-  }
+  line-height: 0em;
   button {
     height: auto;
+    width: 10em;
   }
+  transition: max-height $transition-slow;
+}
+
+.pagedlistitem-info.expanded {
+  max-height: 500px;
+  transition: max-height $transition-slow;
 }
 
 .pagedlistitem-print {
