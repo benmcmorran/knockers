@@ -32,7 +32,6 @@ router.get('/list/:id', function (req, res) {
     res.json(req.params.id);
 });
 
-router.post('/adduser', db.addUser);
 router.post('/adddoor', db.addDoor);
 router.post('/adddevice', db.addDevice);
 router.post('/ring', db.ring);
