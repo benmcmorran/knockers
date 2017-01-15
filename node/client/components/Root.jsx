@@ -21,12 +21,12 @@ const monthNames = [
   "November", "December"
 ];
 
-const uri = "http://130.215.208.188:8080";
+const uri = "http://api.knockt.com";
 
 var Root = React.createClass({
   componentDidMount: function() {
     if (window.location.hash.length > 0) {
-      this.id_token = window.location.hash.length.slice(1);
+      this.id_token = window.location.hash.slice(1);
       
       this.getDoorbells();
     }
@@ -108,6 +108,8 @@ var Root = React.createClass({
   },
   signIn: function(googleUser) {
     this.id_token = googleUser.getAuthResponse().id_token;
+
+    console.log(this.id_token);
 
     this.getDoorbells();
   },
