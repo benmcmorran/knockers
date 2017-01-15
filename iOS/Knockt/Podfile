@@ -8,4 +8,7 @@ target 'Knockt' do
   # Pods for Knockt
   pod 'Firebase/Core'
   pod 'Firebase/Messaging'
+
+  # Pods for Google signin
+  pod 'Google/SignIn'
 end
