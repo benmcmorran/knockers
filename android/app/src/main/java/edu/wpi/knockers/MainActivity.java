@@ -3,6 +3,7 @@ package edu.wpi.knockers;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -27,12 +28,32 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.iid.FirebaseInstanceId;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Text;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.DataOutput;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.SocketTimeoutException;
+import java.net.URL;
+import java.net.URLEncoder;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
 
     private static final String TAG = "MainActivity";
     private static int RC_SIGN_IN = 100;
+    private static final String SERVERHOST = "http://130.215.208.188:8080/adddevice"; //http://130.215.208.188:8080/adddevice/
 
     private GoogleApiClient mGoogleApiClient;
     private TextView mStatusTextView;
@@ -46,16 +67,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d(TAG, "made it here 1");
         super.onCreate(savedInstanceState);
-        Log.d(TAG, "made it here 2");
         setContentView(R.layout.activity_main);
-        Log.d(TAG, "made it here 3");
 
         mStatusTextView = (TextView)findViewById(R.id.message);
 
         deviceName = android.os.Build.MODEL;
         token = FirebaseInstanceId.getInstance().getToken();
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -133,6 +154,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             final GoogleSignInAccount acct = result.getSignInAccount();
             firebaseAuthWithGoogle(acct);
             gToken = acct.getIdToken();
+            try {
+                post();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -149,6 +176,68 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             });
         }
     }
+
+    private void post() throws JSONException {
+        Log.d(TAG, "posting now!");
+        try {
+            URL url = new URL(SERVERHOST);
+            Log.d(TAG, "url made");
+            HttpURLConnection client = (HttpURLConnection) url.openConnection();
+            Log.d(TAG, "client connected");
+
+            client.setDoOutput(true);
+            client.setUseCaches(false);
+            client.setRequestProperty("Content-Type","application/json");
+            client.setRequestProperty("Accept", "application/json");
+            client.setRequestMethod("POST");
+
+            JSONObject jsonParam = new JSONObject();
+            jsonParam.put("token", gToken);
+            jsonParam.put("name", deviceName);
+            jsonParam.put("regkey", token);
+            Log.d(TAG,jsonParam.toString());
+
+            OutputStreamWriter osw = new OutputStreamWriter(client.getOutputStream());
+            osw.write(jsonParam.toString());
+            osw.flush();
+            Log.d(TAG, "Streamed writer finished");
+
+            StringBuilder sb = new StringBuilder();
+            int HttpResult = client.getResponseCode();
+            if (HttpResult == HttpURLConnection.HTTP_OK) {
+                BufferedReader br = new BufferedReader(
+                        new InputStreamReader(client.getInputStream(), "utf-8"));
+                String line = null;
+                while ((line = br.readLine()) != null) {
+                    sb.append(line + "\n");
+                }
+                br.close();
+                Log.d(TAG, sb.toString());
+            } else {
+                Log.d(TAG, client.getResponseMessage());
+            }
+
+            osw.close();
+
+            /**OutputStream os = client.getOutputStream();
+            Log.d(TAG, "output stream made");
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+            Log.d(TAG, "buffered writer made");
+            writer.write("");
+            writer.flush();
+            Log.d(TAG, "flush");
+            writer.close();
+            Log.d(TAG, "close");
+            os.close();
+            Log.d(TAG, "close again");**/
+            if(client != null) // Make sure the connection is not null.
+                client.disconnect();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     @Override
     public void onStart() {
